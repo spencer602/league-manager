@@ -1,0 +1,35 @@
+html {
+	background-color: #cccccc;
+}
+
+h1 {
+	font-family: Arial;
+}
+
+#wrapper {
+	width: 65vw;
+	height: 95vh;
+	padding: 10px;
+	margin: auto;
+	background-color: #FFFFFF;
+	text-align: center;
+	border-radius: 5px;
+	border: solid 1px;
+	border-color: #777777;
+}
+
+#p1 {
+	float: left;
+	padding-left: 100px;
+	clear: left;
+}
+
+#p2 {
+	float: right;
+	padding-right: 100px;
+	clear: right;
+}
+
+#loc {
+	clear: both;
+}

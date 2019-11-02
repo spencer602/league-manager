@@ -7,10 +7,10 @@
 
 
   </head>
-  <script src="index.js"></script>
+  <script src="registermatch.js"></script>
   <body bgcolor = "#777777" onload="bodyLoaded()">
 
-    <form>
+    <form action = "registermatch.php" method = "post">
 
       <h3>Player One:</h3>
 
@@ -40,7 +40,7 @@
       <br><br>
 
       <label id = "playerOneGamesLabel">Games to win: 5</label>
-      <input type = "range" min = "5" max = "9" id = "playerOneGamesInput" value = "5">
+      <input type = "range" min = "5" max = "9" name = "playerOneGamesInput" id = "playerOneGamesInput" value = "5">
       <br><br>
 
       <label id = "playerOnePointsLabel">Points to wager: 10</label>

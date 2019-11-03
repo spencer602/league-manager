@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Register A Match</title>
-	<link rel="stylesheet" href="css/styles.css">
+	<!-- <link rel="stylesheet" href="css/styles.css"> -->
 
 
   </head>
@@ -16,27 +16,25 @@
 
 			  <h3>Player One:</h3>
 
-			  <input list = "playerOne" name = "player1" id = "player1">
+
+        <input list = "playerOne" name = "player1" id = "player1">
 			  <datalist id = "playerOne">
-				<option value = "Britton Schwartzer">
-				<option value = "Nate Neergard">
-				<option value = "Jason Tigart">
-				<option value = "Dustin Juvan">
-				<option value = "Tim Dietz">
-				<option value = "Doug Crossman Sr">
-				<option value = "Charlemagne Lim">
-				<option value = "Alex Peterson">
-				<option value = "Greg Gizinski">
-				<option value = "Jeff Grinwis">
-				<option value = "Misty Debates">
-				<option value = "Darren Hutton">
-				<option value = "Dave Custer">
-				<option value = "Jeremy Gilliam">
-				<option value = "David Biesel">
-				<option value = "Joe Schwartzer">
-				<option value = "Tony Smith">
-				<option value = "Gary Pino">
-				<option value = "Vance Miyakawa">
+          <?php
+            $dbhost  = 'localhost';
+
+            $dbname  = 'sharkhunt';   // Modify these...
+            $dbuser  = 'user14';   // ...variables according
+            $dbpass  = '14rone';   // ...to your installation
+
+            $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+            if ($connection->connect_error)
+                die("Fatal Error 1");
+
+            $sql = mysqli_query($connection, "SELECT name FROM player");
+            while ($row = $sql->fetch_assoc()){
+              echo "<option value= \"" . $row['name'] . "\">";
+            }
+          ?>
 			  </datalist>
 			  <br><br>
 
@@ -45,11 +43,11 @@
 			  <br><br>
 
 			  <label id = "playerOnePointsLabel">Points to wager: 10</label>
-			  <input type = "range" min = "10" max = "25" step = "5" id = "playerOnePointsInput" value = "10">
+			  <input type = "range" min = "10" max = "25" step = "5" name = "playerOnePointsInput" id = "playerOnePointsInput" value = "10">
 			  <br><br>
 
 			  <label id = "playerOneGamesWonLabel">Games won: 0</label>
-			  <input type = "range" min = "0" max = "9" id = "playerOneGamesWonInput" value = "0">
+			  <input type = "range" min = "0" max = "9" name = "playerOneGamesWonInput" id = "playerOneGamesWonInput" value = "0">
 		  </div>
 		  <div id="p2">
 		  <h3>Player Two:</h3>
@@ -57,38 +55,35 @@
 		  <input list = "playerTwo" id = "player2" name = "player2">
 
 		  <datalist id = "playerTwo">
-			<option value = "Britton Schwartzer">
-			<option value = "Nate Neergard">
-			<option value = "Jason Tigart">
-			<option value = "Dustin Juvan">
-			<option value = "Tim Dietz">
-			<option value = "Doug Crossman Sr">
-			<option value = "Charlemagne Lim">
-			<option value = "Alex Peterson">
-			<option value = "Greg Gizinski">
-			<option value = "Jeff Grinwis">
-			<option value = "Misty Debates">
-			<option value = "Darren Hutton">
-			<option value = "Dave Custer">
-			<option value = "Jeremy Gilliam">
-			<option value = "David Biesel">
-			<option value = "Joe Schwartzer">
-			<option value = "Tony Smith">
-			<option value = "Gary Pino">
-			<option value = "Vance Miyakawa">
+        <?php
+          $dbhost  = 'localhost';
+
+          $dbname  = 'sharkhunt';   // Modify these...
+          $dbuser  = 'user14';   // ...variables according
+          $dbpass  = '14rone';   // ...to your installation
+
+          $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+          if ($connection->connect_error)
+              die("Fatal Error 1");
+
+          $sql = mysqli_query($connection, "SELECT name FROM player");
+          while ($row = $sql->fetch_assoc()){
+            echo "<option value= \"" . $row['name'] . "\">";
+          }
+        ?>
 		  </datalist>
 		  <br><br>
 
 		  <label id = "playerTwoGamesLabel">Games to win: 5</label>
-		  <input type = "range" min = "5" max = "9" id = "playerTwoGamesInput" value = "5">
+		  <input type = "range" min = "5" max = "9" name = "playerTwoGamesInput" id = "playerTwoGamesInput" value = "5">
 		  <br><br>
 
 		  <label id = "playerTwoPointsLabel">Points to wager: 10</label>
-		  <input type = "range" min = "10" max = "25" step = "5" id = "playerTwoPointsInput" value = "10">
+		  <input type = "range" min = "10" max = "25" step = "5" name = "playerTwoPointsInput" id = "playerTwoPointsInput" value = "10">
 		  <br><br>
 
 		  <label id = "playerTwoGamesWonLabel">Games won: 0</label>
-		  <input type = "range" min = "0" max = "9" id = "playerTwoGamesWonInput" value = "0">
+		  <input type = "range" min = "0" max = "9" name = "playerTwoGamesWonInput" id = "playerTwoGamesWonInput" value = "0">
 		  <br><br><br><br>
 		  </div>
 			<div id="loc">

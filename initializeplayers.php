@@ -1,7 +1,7 @@
 <?php
 $dbhost  = 'localhost';
 
-$dbname  = 'sharkhunt';   // Modify these...
+$dbname  = 'db14';   // Modify these...
 $dbuser  = 'user14';   // ...variables according
 $dbpass  = '14rone';   // ...to your installation
 
@@ -36,31 +36,21 @@ $p2gamesWon = $_POST["playerTwoGamesWonInput"];
 
 $location = $_POST["locationPlayed"];
 
-
-$p1id = queryMysql("SELECT playerid from player where name = '$p1'");
-$p1id = $p1id->fetch_array(MYSQLI_ASSOC);
-$p1id = $p1id['playerid'];
-
-$p2id = queryMysql("SELECT playerid from player where name = '$p2'");
-$p2id = $p2id->fetch_array(MYSQLI_ASSOC);
-$p2id = $p2id['playerid'];
+$p1id = queryMysql("SELECT sqrt(25)");
 
 
-// $dateAndTime =
+// $p1id = queryMysql("SELECT playerid FROM player WHERE name = '$p1'");
 
-// $value = $contents['playerid'];
+echo $p1id;
 
-//print_r($p1id);
-
-
-$q = "insert into matches
-(p1id, p2id, p1pointswagered, p2pointswagered, p1gamesneeded,
-  p2gamesneeded, p1gameswon, p2gameswon, p1ero, p2ero, dateandtime,
-  location)
-  values
-  ($p1id, $p2id, $p1gamesToWin, $p2gamesToWin, $p1points, $p2points,
-  $p1gamesWon, $p2gamesWon, 0, 0, NOW(), '$location');";
-
-queryMysql($q);
+// $q = "insert into matches
+//   (p1id, p2id, p1pointswagered, p2pointswagered, p1gamesneeded,
+//   p2gamesneeded, p1gameswon, p2gameswon, p1ero, p2ero, dateandtime,
+//   location)
+//   values
+//   ($p1, $p2, $p1gamesToWin, $p2gamesToWin, $p1points, $p2points,
+//   $p1gamesWon, $p2gamesWon, 0, 0, NOW(), $location);";
+//
+// queryMysql($q);
 
 ?>

@@ -67,4 +67,54 @@ $q = "insert into matches
 
 queryMysql($q);
 
+$p1winner = false;
+
+if ($p1gamesWon == $p1gamesToWin) {
+    $p1winner = true;
+}
+
+$p1 = queryMysql("SELECT * FROM players WHERE player_id = $p1id");
+$p1 = $p1->fetch_array(MYSQLI_ASSOC);
+$p1Points = $p1['points'];
+
+$p2 = queryMysql("SELECT * FROM players WHERE player_id = $p2id");
+$p2 = $p2->fetch_array(MYSQLI_ASSOC);
+$p2Points = $p2['points'];
+
+$loc = queryMysql("SELECT * FROM locations WHERE location_id = $loc_id");
+$loc = $loc->fetch_array(MYSQLI_ASSOC);
+$locGames = $loc['games_played'] + $p2gamesWon + $p1gamesWon;
+$locMatches = $loc['matches_played'] + 1;
+
+$p1gamewins = $p1['games_won'] + $p1gamesWon;
+$p1games = $p1['games_played'] + $p2gamesWon + $p1gamesWon;
+$p1matchwins = $p1['matches_won'];
+$p1matches = $p1['matches_played'] + 1;
+//$p1eros = $p1['eros'] + eros from input
+
+$p2gamewins = $p2['games_won'] + $p2gamesWon;
+$p2games = $p2['games_played'] + $p2gamesWon + $p1gamesWon;
+$p2matchwins = $p2['matches_won'];
+$p2matches = $p2['matches_played'] + 1;
+//$p2eros = $p2['eros'] + eros from input
+
+
+if ($p1winner) {
+    $p1Points += $p2points;
+    $p2Points -= $p2points;
+    $p1matchwins += 1;
+} else {
+    $p1Points -= $p1points;
+    $p2Points += $p1points;
+    $p2matchwins +=1;
+}
+
+queryMysql("UPDATE players SET points = $p1Points, games_played = $p1games, games_won = $p1gamewins, 
+            matches_played = $p1matches, matches_won = $p1matchwins WHERE player_id = $p1id");
+
+queryMysql("UPDATE players SET points = $p2Points, games_played = $p2games, games_won = $p2gamewins, 
+            matches_played = $p2matches, matches_won = $p2matchwins WHERE player_id = $p2id");
+
+queryMysql("UPDATE locations SET games_played = $locGames, matches_played = $locMatches WHERE location_id = $loc_id ");
+
 ?>

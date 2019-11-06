@@ -9,6 +9,5 @@
 <a href = "displayallmatches.php">Show Match History</a>
 <a href = "displaystandings.php">Display Current Standings</a>
 
-
 </body>
 </html>

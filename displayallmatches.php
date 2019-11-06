@@ -10,7 +10,7 @@ $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($connection->connect_error)
     die("Fatal Error 1");
 
-$allMatches = mysqli_query($connection, "SELECT * from matches");
+$allMatches = mysqli_query($connection, "SELECT * from matches ORDER BY date_and_time DESC");
 
 while ($row = $allMatches->fetch_assoc()) {
     $p1id = $row['p1_id'];

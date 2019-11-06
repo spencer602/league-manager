@@ -58,7 +58,7 @@ $q = "insert into matches
   p2gamesneeded, p1gameswon, p2gameswon, p1ero, p2ero, dateandtime,
   location)
   values
-  ($p1id, $p2id, $p1gamesToWin, $p2gamesToWin, $p1points, $p2points,
+  ($p1id, $p2id, $p1points, $p2points, $p1gamesToWin, $p2gamesToWin,
   $p1gamesWon, $p2gamesWon, 0, 0, NOW(), '$location');";
 
 queryMysql($q);

@@ -15,4 +15,6 @@ while ($row = $sql->fetch_assoc()){
   echo "<option value= \"" . $row['player_name'] . "\">";
 }
 
+echo "<a href = 'index.php'>Back to Home</a>";
+
 ?>

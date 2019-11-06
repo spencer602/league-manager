@@ -117,4 +117,5 @@ queryMysql("UPDATE players SET points = $p2Points, games_played = $p2games, game
 
 queryMysql("UPDATE locations SET games_played = $locGames, matches_played = $locMatches WHERE location_id = $loc_id ");
 
-?>
+echo "match registered<br>";
+echo "<a href = 'index.php'>Back to Home</a>";

@@ -25,3 +25,5 @@ while ($row = $allStandings->fetch_assoc()) {
     echo "$position: $points $name Matches: $matchesWon/$matchesPlayed   Games: $gamesWon/$gamesPlayed<br>";
     
 }
+
+echo "<a href = 'index.php'>Back to Home</a>";

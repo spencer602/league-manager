@@ -13,29 +13,29 @@ if ($connection->connect_error)
 $allMatches = mysqli_query($connection, "SELECT * from matches");
 
 while ($row = $allMatches->fetch_assoc()) {
-    $p1id = $row['p1id'];
-    $p2id = $row['p2id'];
+    $p1id = $row['p1_id'];
+    $p2id = $row['p2_id'];
 
     // echo "<p>$p1id played $p2id</p>";
 
 
-    $p1name = mysqli_query($connection, "SELECT name FROM player where playerid = '$p1id'");
-    $p2name = mysqli_query($connection, "SELECT name FROM player where playerid = '$p2id'");
+    $p1name = mysqli_query($connection, "SELECT player_name FROM players where player_id = '$p1id'");
+    $p2name = mysqli_query($connection, "SELECT player_name FROM players where player_id = '$p2id'");
 
     $p1name = $p1name->fetch_array(MYSQLI_ASSOC);
-    $p1name = $p1name['name'];
+    $p1name = $p1name['player_name'];
 
     $p2name = $p2name->fetch_array(MYSQLI_ASSOC);
-    $p2name = $p2name['name'];
+    $p2name = $p2name['player_name'];
 
-    $p1gamesToWin = $row['p1gamesneeded'];
-    $p2gamesToWin = $row['p2gamesneeded'];
+    $p1gamesToWin = $row['p1_games_needed'];
+    $p2gamesToWin = $row['p2_games_needed'];
 
-    $p1gamesWon = $row['p1gameswon'];
-    $p2gamesWon = $row['p2gameswon'];
+    $p1gamesWon = $row['p1_games_won'];
+    $p2gamesWon = $row['p2_games_won'];
 
-    $p1pointsWagered = $row['p1pointswagered'];
-    $p2pointsWagered = $row['p2pointswagered'];
+    $p1pointsWagered = $row['p1_points_wagered'];
+    $p2pointsWagered = $row['p2_points_wagered'];
 
     echo "<p>$p1name: $p1gamesWon/$p1gamesToWin vs $p2name: $p2gamesWon/$p2gamesToWin</p>";
 }

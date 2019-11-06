@@ -61,15 +61,10 @@
 		  <input list = "location" id = "locationPlayed" name = "locationPlayed">
 
 		  <datalist id = "location">
-			<option value = "Molly Brown">
-			<option value = "Broken Arrow">
-			<option value = "Whiskey Creek">
-			<option value = "Cat's Paw">
-			<option value = "Friendly">
-			<option value = "Scoop">
-			<option value = "Other">
+              <?php include 'populatelocationlist.php';?>
 
-		  </datalist>
+
+          </datalist>
 		  <br><br><br>
 
 		  <label id = "playerOnePasswordLabel">Player One password:</label>

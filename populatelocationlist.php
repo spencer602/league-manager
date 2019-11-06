@@ -10,9 +10,9 @@ $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($connection->connect_error)
     die("Fatal Error 1");
 
-$sql = mysqli_query($connection, "SELECT player_name FROM players");
+$sql = mysqli_query($connection, "SELECT location_name FROM locations");
 while ($row = $sql->fetch_assoc()){
-  echo "<option value= \"" . $row['player_name'] . "\">";
+    echo "<option value= \"" . $row['location_name'] . "\">";
 }
 
 ?>

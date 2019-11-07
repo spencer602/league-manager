@@ -2,8 +2,8 @@
 $dbhost  = 'localhost';
 
 $dbname  = 'sharkhunt';   // Modify these...
-$dbuser  = 'user14';   // ...variables according
-$dbpass  = '14rone';   // ...to your installation
+$dbuser  = 'spencer';   // ...variables according
+$dbpass  = 'salute';   // ...to your installation
 
 $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($connection->connect_error)

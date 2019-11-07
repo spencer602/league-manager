@@ -5,117 +5,104 @@ $dbname  = 'sharkhunt';   // Modify these...
 $dbuser  = 'user14';   // ...variables according
 $dbpass  = '14rone';   // ...to your installation
 
-
 $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($connection->connect_error)
-    die("Fatal Error 1");
+    die("Fatal Error 1");   // if there is a connection error
 
-
-
+// queries the database with the given query, "Fatal Error 2" upon error
 function queryMysql($query) {
     global $connection;
     $result = $connection->query($query);
-    if (!$result) die("Fatal Error 2");
+    if (!$result) die("Fatal Error 2: . $query");
     return $result;
 }
 
+// gathers the data from the form
+$formP1Name = $_POST["player1"];
+$formP2Name = $_POST["player2"];
+$formP1GamesToWin = $_POST["playerOneGamesInput"];
+$formP2GamesToWin = $_POST["playerTwoGamesInput"];
+$formP1PointsWagered = $_POST["playerOnePointsInput"];
+$formP2PointsWagered = $_POST["playerTwoPointsInput"];
+$formP1GamesWon = $_POST["playerOneGamesWonInput"];
+$formP2GamesWon = $_POST["playerTwoGamesWonInput"];
+$formLocationName = $_POST["locationPlayed"];
 
+// queries the player table
+$p1Row = queryMysql("SELECT * FROM players WHERE player_name = '$formP1Name'");
+$p1Row = $p1Row->fetch_array(MYSQLI_ASSOC);
+$p1ID = $p1Row['player_id'];
 
+$p2Row = queryMysql("SELECT * FROM players WHERE player_name= '$formP2Name'");
+$p2Row = $p2Row->fetch_array(MYSQLI_ASSOC);
+$p2ID = $p2Row['player_id'];
 
-$p1 = $_POST["player1"];
-$p2 = $_POST["player2"];
+// gets the location data from the locationName via the 'locations' table
+$locationRow = queryMysql("SELECT * FROM locations WHERE location_name = '$formLocationName'");
+$locationRow = $locationRow->fetch_array(MYSQLI_ASSOC);
+$locationID = $locationRow['location_id'];
 
-$p1gamesToWin = $_POST["playerOneGamesInput"];
-$p2gamesToWin = $_POST["playerTwoGamesInput"];
-
-$p1points = $_POST["playerOnePointsInput"];
-$p2points = $_POST["playerTwoPointsInput"];
-
-$p1gamesWon = $_POST["playerOneGamesWonInput"];
-$p2gamesWon = $_POST["playerTwoGamesWonInput"];
-
-$location = $_POST["locationPlayed"];
-
-
-$p1id = queryMysql("SELECT player_id from players where player_name = '$p1'");
-$p1id = $p1id->fetch_array(MYSQLI_ASSOC);
-$p1id = $p1id['player_id'];
-
-$p2id = queryMysql("SELECT player_id from players where player_name = '$p2'");
-$p2id = $p2id->fetch_array(MYSQLI_ASSOC);
-$p2id = $p2id['player_id'];
-
-$loc_id = queryMysql("SELECT location_id from locations where location_name = '$location'");
-$loc_id = $loc_id->fetch_array(MYSQLI_ASSOC);
-$loc_id = $loc_id['location_id'];
-
-
-// $dateAndTime =
-
-// $value = $contents['playerid'];
-
-//print_r($p1id);
-
-
-$q = "insert into matches
+// the query we are using for inserting the match into the table
+$insertQueryString = "INSERT INTO matches
 (p1_id, p2_id, p1_points_wagered, p2_points_wagered, p1_games_needed,
   p2_games_needed, p1_games_won, p2_games_won, p1_ero, p2_ero, date_and_time,
   location_played)
-  values
-  ($p1id, $p2id, $p1points, $p2points, $p1gamesToWin, $p2gamesToWin,
-  $p1gamesWon, $p2gamesWon, 0, 0, NOW(), $loc_id);";
+  VALUES
+  ($p1ID, $p2ID, $formP1PointsWagered, $formP2PointsWagered, $formP1GamesToWin, $formP2GamesToWin,
+  $formP1GamesWon, $formP2GamesWon, 0, 0, NOW(), $locationID);";
 
-queryMysql($q);
+// send the query to the database
+queryMysql($insertQueryString);
 
-$p1winner = false;
+$p1IsWinner = false;
 
-if ($p1gamesWon == $p1gamesToWin) {
-    $p1winner = true;
+// determines the winner
+if ($formP1GamesWon == $formP1GamesToWin) {
+    $p1IsWinner = true;
 }
 
-$p1 = queryMysql("SELECT * FROM players WHERE player_id = $p1id");
-$p1 = $p1->fetch_array(MYSQLI_ASSOC);
-$p1Points = $p1['points'];
+// gather the current points for the plaeyers
+$p1TotalPoints = $p1Row['points'];
+$p2TotalPoints = $p2Row['points'];
 
-$p2 = queryMysql("SELECT * FROM players WHERE player_id = $p2id");
-$p2 = $p2->fetch_array(MYSQLI_ASSOC);
-$p2Points = $p2['points'];
+// matches and games played at the location
+$gamesPlayedAtLocation = $locationRow['games_played'] + $formP2GamesWon + $formP1GamesWon;
+$matchesPlayedAtLocation = $locationRow['matches_played'] + 1;
 
-$loc = queryMysql("SELECT * FROM locations WHERE location_id = $loc_id");
-$loc = $loc->fetch_array(MYSQLI_ASSOC);
-$locGames = $loc['games_played'] + $p2gamesWon + $p1gamesWon;
-$locMatches = $loc['matches_played'] + 1;
-
-$p1gamewins = $p1['games_won'] + $p1gamesWon;
-$p1games = $p1['games_played'] + $p2gamesWon + $p1gamesWon;
-$p1matchwins = $p1['matches_won'];
-$p1matches = $p1['matches_played'] + 1;
+// update the stats for player1
+$p1TotalGameWins = $p1Row['games_won'] + $formP1GamesWon;
+$p1TotalGamesPlayed = $p1Row['games_played'] + $formP2GamesWon + $formP1GamesWon;
+$p1TotalMatchWins = $p1Row['matches_won'];
+$p1TotalMatchesPlayed = $p1Row['matches_played'] + 1;
 //$p1eros = $p1['eros'] + eros from input
 
-$p2gamewins = $p2['games_won'] + $p2gamesWon;
-$p2games = $p2['games_played'] + $p2gamesWon + $p1gamesWon;
-$p2matchwins = $p2['matches_won'];
-$p2matches = $p2['matches_played'] + 1;
+// update the stats for player2
+$p2TotalGameWins = $p2Row['games_won'] + $formP2GamesWon;
+$p2TotalGamesPlayed = $p2Row['games_played'] + $formP2GamesWon + $formP1GamesWon;
+$p2TotalMatchWins = $p2Row['matches_won'];
+$p2TotalMatchesPlayed = $p2Row['matches_played'] + 1;
 //$p2eros = $p2['eros'] + eros from input
 
-
-if ($p1winner) {
-    $p1Points += $p2points;
-    $p2Points -= $p2points;
-    $p1matchwins += 1;
-} else {
-    $p1Points -= $p1points;
-    $p2Points += $p1points;
-    $p2matchwins +=1;
+// update the stats based on winner: assigning points (even if there is a point handicap given)
+// NOTE: if p1 is winner, then the number of points won/lost by each is determined by how much player2 wagered
+if ($p1IsWinner) {
+    $p1TotalPoints += $formP2PointsWagered;
+    $p2TotalPoints -= $formP2PointsWagered;
+    $p1TotalMatchWins += 1;
+} else {    // NOTE: if p2 is winner, then the number of points won/lost by each is determined by how much player1 wagered
+    $p1TotalPoints -= $formP1PointsWagered;
+    $p2TotalPoints += $formP1PointsWagered;
+    $p2TotalMatchWins +=1;
 }
 
-queryMysql("UPDATE players SET points = $p1Points, games_played = $p1games, games_won = $p1gamewins, 
-            matches_played = $p1matches, matches_won = $p1matchwins WHERE player_id = $p1id");
+// update the players table and locations table with the new player and location data
+queryMysql("UPDATE players SET points = $p1TotalPoints, games_played = $p1TotalGamesPlayed, games_won = $p1TotalGameWins, 
+            matches_played = $p1TotalMatchesPlayed, matches_won = $p1TotalMatchWins WHERE player_id = $p1ID");
 
-queryMysql("UPDATE players SET points = $p2Points, games_played = $p2games, games_won = $p2gamewins, 
-            matches_played = $p2matches, matches_won = $p2matchwins WHERE player_id = $p2id");
+queryMysql("UPDATE players SET points = $p2TotalPoints, games_played = $p2TotalGamesPlayed, games_won = $p2TotalGameWins, 
+            matches_played = $p2TotalMatchesPlayed, matches_won = $p2TotalMatchWins WHERE player_id = $p2ID");
 
-queryMysql("UPDATE locations SET games_played = $locGames, matches_played = $locMatches WHERE location_id = $loc_id ");
+queryMysql("UPDATE locations SET games_played = $gamesPlayedAtLocation, matches_played = $matchesPlayedAtLocation WHERE location_id = $locationID ");
 
 echo "match registered<br>";
 echo "<a href = 'index.php'>Back to Home</a>";

@@ -35,6 +35,7 @@ while ($row = $allMatches->fetch_assoc()) {
     $p1pointsWagered = $row['p1_points_wagered'];
     $p2pointsWagered = $row['p2_points_wagered'];
 
+    // this could be updated to look better
     echo "<p>$p1name: $p1gamesWon/$p1gamesToWin vs $p2name: $p2gamesWon/$p2gamesToWin</p>";
 }
 

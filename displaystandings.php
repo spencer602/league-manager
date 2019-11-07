@@ -11,6 +11,8 @@ if ($connection->connect_error)
     die("Fatal Error 1");
 
 $allStandings = mysqli_query($connection, "SELECT * from players ORDER BY points DESC");
+
+// position is the players position in the rankings
 $position = 0;
 
 while ($row = $allStandings->fetch_assoc()) {
@@ -22,6 +24,7 @@ while ($row = $allStandings->fetch_assoc()) {
     $matchesWon = $row['matches_won'];
     $matchesPlayed = $row['matches_played'];
 
+    // this could be updated to look better
     echo "$position: $points $name Matches: $matchesWon/$matchesPlayed   Games: $gamesWon/$gamesPlayed<br>";
     
 }

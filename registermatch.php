@@ -104,5 +104,8 @@ queryMysql("UPDATE players SET points = $p2TotalPoints, games_played = $p2TotalG
 
 queryMysql("UPDATE locations SET games_played = $gamesPlayedAtLocation, matches_played = $matchesPlayedAtLocation WHERE location_id = $locationID ");
 
+
+// this is what is displayed after a match is registered. This could be improved to look better
+
 echo "match registered<br>";
 echo "<a href = 'index.php'>Back to Home</a>";

@@ -29,8 +29,7 @@ $formP1PointsWagered = $_POST["playerOnePointsInput"];
 $formP2PointsWagered = $_POST["playerTwoPointsInput"];
 $formP1GamesWon = $_POST["playerOneGamesWonInput"];
 $formP2GamesWon = $_POST["playerTwoGamesWonInput"];
-//$formLocationName = $_POST["locationPlayed"];
-$formLocationName = "Molly Brown";
+$formLocationName = $_POST["locationPlayed"];
 
 
 // queries the player table

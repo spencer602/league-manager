@@ -17,10 +17,9 @@
 			  <h3>Player One:</h3>
 
 
-        <input list = "playerOne" name = "player1" id = "player1">
-			  <datalist id = "playerOne">
+          <select name = "player1" id = "player1">
           <?php include 'populateplayerlist.php';?>
-          </datalist>
+          </select>
           <br><br>
 
           <label id = "playerOneGamesLabel">Games to win: 5</label>
@@ -42,11 +41,9 @@
 		  <div id="p2">
 		  <h3>Player Two:</h3>
 
-		  <input list = "playerTwo" id = "player2" name = "player2">
-
-		  <datalist id = "playerTwo">
+		  <select id = "player2" name = "player2">
           <?php include 'populateplayerlist.php';?>
-		  </datalist>
+          </select>
 		  <br><br>
 
 		  <label id = "playerTwoGamesLabel">Games to win: 5</label>

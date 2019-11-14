@@ -10,6 +10,42 @@ var playerTwoGamesWonInput;
 var playerOneInput;
 var playerTwoInput;
 
+var playerOneEROsInput;
+var playerTwoEROsInput;
+
+function validateForm() {
+  if (!checkForNoWinner()) {
+    return false;
+  }
+  if (!checkForTwoWinners()) { return false; }
+  if (!checkForNamesEqual()) { return false; }
+}
+
+function checkForNamesEqual() {
+  if (playerOneInput.value == playerTwoInput.value) {
+    alert("Appears that you are playing with yourself???");
+    return false;
+  }
+  return true;
+}
+
+function checkForNoWinner() {
+  if (playerOneGamesWonInput.value != playerOneGamesInput.value && playerTwoGamesWonInput.value != playerTwoGamesInput.value) {
+    alert("Appears that nobody won this match???");
+    return false;
+  }
+  return true;
+}
+
+function checkForTwoWinners() {
+  if (playerOneGamesWonInput.value == playerOneGamesInput.value && playerTwoGamesWonInput.value == playerTwoGamesInput.value) {
+    alert("Appears that both of you won this match???");
+    return false;
+  }
+  return true;
+}
+
+
 function bodyLoaded() {
   // player name inputs
   playerOneInput = document.getElementById("player1");
@@ -43,7 +79,13 @@ function bodyLoaded() {
 
   playerTwoGamesWonInput = document.getElementById("playerTwoGamesWonInput");
   playerTwoGamesWonInput.addEventListener("input", changePlayerTwoGamesWonLabel);
-  playerTwoGamesWonLabel.innerHTML = "Games won: " + playerTwoGamesWonInput.value;
+
+  // EROs
+  playerOneEROsInput = document.getElementById("playerOneEROInput");
+  playerOneEROsInput.addEventListener("input", changePlayerOneEROLabel);
+
+  playerTwoEROsInput = document.getElementById("playerTwoEROInput");
+  playerTwoEROsInput.addEventListener("input", changePlayerTwoEROLabel);
 
   // update games needed to win
   playerOneGamesInput.addEventListener("change", updatePlayerOneGamesNeededToWin)
@@ -53,6 +95,15 @@ function bodyLoaded() {
 
 }
 
+function changePlayerOneEROLabel(event) {
+  var playerOneEROLabel = document.getElementById("playerOneEROLabel");
+  playerOneEROLabel.innerHTML = "EROs: " + playerOneEROsInput.value;
+}
+
+function changePlayerTwoEROLabel(event) {
+  var playerTwoEROLabel = document.getElementById("playerTwoEROLabel");
+  playerTwoEROLabel.innerHTML = "EROs: " + playerTwoEROsInput.value;
+}
 
 function changePlayerOneGamesLabel(event) {
   var playerOneGamesLabel = document.getElementById("playerOneGamesLabel");
@@ -77,11 +128,15 @@ function changePlayerTwoPointsLabel(event) {
 function changePlayerOneGamesWonLabel(event) {
   var playerOneGamesWonLabel = document.getElementById("playerOneGamesWonLabel");
   playerOneGamesWonLabel.innerHTML = "Games won: " + playerOneGamesWonInput.value;
+  playerOneEROsInput.max = playerOneGamesWonInput.value
+  changePlayerOneEROLabel()
 }
 
 function changePlayerTwoGamesWonLabel(event) {
   var playerTwoGamesWonLabel = document.getElementById("playerTwoGamesWonLabel");
   playerTwoGamesWonLabel.innerHTML = "Games won: " + playerTwoGamesWonInput.value;
+  playerTwoEROsInput.max = playerTwoGamesWonInput.value
+  changePlayerTwoEROLabel()
 }
 
 function changePlayerOnePasswordName(event) {
@@ -97,9 +152,13 @@ function changePlayerTwoPasswordName(event) {
 function updatePlayerOneGamesNeededToWin(event) {
   playerOneGamesWonInput.max = playerOneGamesInput.value;
   changePlayerOneGamesWonLabel(null);
+  playerOneEROsInput.max = playerOneGamesWonInput.value
+  changePlayerOneEROLabel()
 }
 
 function updatePlayerTwoGamesNeededToWin(event) {
   playerTwoGamesWonInput.max = playerTwoGamesInput.value;
   changePlayerTwoGamesWonLabel(null);
+  playerTwoEROsInput.max = playerTwoGamesWonInput.value
+  changePlayerTwoEROLabel()
 }

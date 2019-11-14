@@ -12,7 +12,7 @@ if ($connection->connect_error)
 
 $sql = mysqli_query($connection, "SELECT location_name FROM locations");
 while ($row = $sql->fetch_assoc()){
-    echo "<option value= \"" . $row['location_name'] . "\">";
+    echo "<option value= \"" . $row['location_name'] . "\">" . $row['location_name'] . "</option>";
 }
 
 ?>

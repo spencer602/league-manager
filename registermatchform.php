@@ -65,14 +65,10 @@
 		  </div>
 			<div id="loc">
 		  Location<br>
-		  <input list = "location" id = "locationPlayed" name = "locationPlayed">
-
-		  <datalist id = "location">
+		  <select id = "locationPlayed" name = "locationPlayed">
               <?php include 'populatelocationlist.php';?>
-
-
-          </datalist>
-		  <br><br><br>
+          </select>
+          <br><br><br>
 
 		  <label id = "playerOnePasswordLabel">Player One password:</label>
 		  <input type = "password" name = "playerOnePassword" id = "playerOnePassword">

@@ -27,6 +27,8 @@ $formP2PointsWagered = $_POST["playerTwoPointsInput"];
 $formP1GamesWon = $_POST["playerOneGamesWonInput"];
 $formP2GamesWon = $_POST["playerTwoGamesWonInput"];
 $formLocationName = $_POST["locationPlayed"];
+$formP1ERO = $_POST["playerOneEROInput"];
+$formP2ERO = $_POST["playerTwoEROInput"];
 
 // queries the player table
 $p1Row = queryMysql("SELECT * FROM players WHERE player_name = '$formP1Name'");
@@ -49,7 +51,7 @@ $insertQueryString = "INSERT INTO matches
   location_played)
   VALUES
   ($p1ID, $p2ID, $formP1PointsWagered, $formP2PointsWagered, $formP1GamesToWin, $formP2GamesToWin,
-  $formP1GamesWon, $formP2GamesWon, 0, 0, NOW(), $locationID);";
+  $formP1GamesWon, $formP2GamesWon, $formP1ERO, $formP2ERO, NOW(), $locationID);";
 
 // send the query to the database
 queryMysql($insertQueryString);
@@ -74,14 +76,14 @@ $p1TotalGameWins = $p1Row['games_won'] + $formP1GamesWon;
 $p1TotalGamesPlayed = $p1Row['games_played'] + $formP2GamesWon + $formP1GamesWon;
 $p1TotalMatchWins = $p1Row['matches_won'];
 $p1TotalMatchesPlayed = $p1Row['matches_played'] + 1;
-//$p1eros = $p1['eros'] + eros from input
+$p1eros = $p1Row['eros'] + $formP1ERO;
 
 // update the stats for player2
 $p2TotalGameWins = $p2Row['games_won'] + $formP2GamesWon;
 $p2TotalGamesPlayed = $p2Row['games_played'] + $formP2GamesWon + $formP1GamesWon;
 $p2TotalMatchWins = $p2Row['matches_won'];
 $p2TotalMatchesPlayed = $p2Row['matches_played'] + 1;
-//$p2eros = $p2['eros'] + eros from input
+$p2eros = $p2Row['eros'] + $formP2ERO;
 
 // update the stats based on winner: assigning points (even if there is a point handicap given)
 // NOTE: if p1 is winner, then the number of points won/lost by each is determined by how much player2 wagered
@@ -96,10 +98,10 @@ if ($p1IsWinner) {
 }
 
 // update the players table and locations table with the new player and location data
-queryMysql("UPDATE players SET points = $p1TotalPoints, games_played = $p1TotalGamesPlayed, games_won = $p1TotalGameWins, 
+queryMysql("UPDATE players SET eros = $p1eros, points = $p1TotalPoints, games_played = $p1TotalGamesPlayed, games_won = $p1TotalGameWins, 
             matches_played = $p1TotalMatchesPlayed, matches_won = $p1TotalMatchWins WHERE player_id = $p1ID");
 
-queryMysql("UPDATE players SET points = $p2TotalPoints, games_played = $p2TotalGamesPlayed, games_won = $p2TotalGameWins, 
+queryMysql("UPDATE players SET eros = $p2eros, points = $p2TotalPoints, games_played = $p2TotalGamesPlayed, games_won = $p2TotalGameWins, 
             matches_played = $p2TotalMatchesPlayed, matches_won = $p2TotalMatchWins WHERE player_id = $p2ID");
 
 queryMysql("UPDATE locations SET games_played = $gamesPlayedAtLocation, matches_played = $matchesPlayedAtLocation WHERE location_id = $locationID ");

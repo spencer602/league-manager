@@ -1,0 +1,17 @@
+@media only screen and (max-width: 1000px){
+	
+}
+@media only screen and (min-width: 1001px){
+	h1{
+		padding-top: 25px;
+	}
+}
+#imgcontainer{
+	width: 100%;
+	height: auto;
+}
+
+#flyer{
+	width: 100%;
+	height: auto;
+}

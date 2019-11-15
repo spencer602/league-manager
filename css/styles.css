@@ -1,35 +1,126 @@
-html {
-	background-color: #cccccc;
+@media only screen and (max-width: 1000px){
+	#wrapper {
+		width: 95%;
+		height: auto;
+		padding: 10px;
+		margin: auto;
+		background-color: #FFFFFF;
+		text-align: center;
+		border-radius: 5px;
+		border: solid 1px;
+		border-color: #777777;
+		position: relative;
+	}
+	h1{
+		font-size: 14pt;
+	}
+	#header{
+		height: 100px;
+	}
+	li a{
+		font-size: 15px;
+	}
+	li{
+		padding: 10px;
+	}
 }
-
-h1 {
+@media only screen and (min-width: 1001px){
+	#wrapper {
+		width: 65%;
+		height: auto;
+		padding: 10px;
+		margin: auto;
+		background-color: #FFFFFF;
+		text-align: center;
+		border-radius: 5px;
+		border: solid 1px;
+		border-color: #777777;
+		position: relative;
+	}
+	h1{
+		font-size: 28pt;
+	}
+	#header{
+		height: 165px;
+	}
+	
+	li a{
+		font-size: 25px;
+	}
+	li{
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+#header {
+	width: 100%;
+	position: relative;
+	text-align: center;
+	display: inline-block;
+}
+#footer {
+	width: 100%;
+	height: 25px;
+	border-top: groove 2px;
+}
+#container{
+	text-align: center;
+	margin: auto;
+	height: auto;
 	font-family: Arial;
 }
-
-#wrapper {
-	width: 65vw;
+html {
+	background-color: #eeeeee;
 	height: 95vh;
-	padding: 10px;
-	margin: auto;
-	background-color: #FFFFFF;
-	text-align: center;
-	border-radius: 5px;
-	border: solid 1px;
-	border-color: #777777;
 }
-
-#p1 {
-	float: left;
-	padding-left: 100px;
-	clear: left;
-}
-
-#p2 {
-	float: right;
-	padding-right: 100px;
-	clear: right;
-}
-
-#loc {
+.spacer{
 	clear: both;
+}
+#pageName{
+	font-family: Calibri;
+	text-align: center;
+	width: 50%;
+	float: right;
+}
+h1 {
+	display: inline;
+	font-family: Impact;
+}
+body{
+	height: 100%;
+}
+#nav{
+	background-color: #444;
+	width: 100%;
+	height: auto;
+}
+
+#navbar{
+	padding: 0px;
+	list-style-type: none;
+	display: inline-block;
+}
+
+li a{
+	color: white;
+	text-decoration: none;
+	font-family: Calibri;
+	padding: 10px;
+}
+li{
+	display: inline;
+	float: left;
+}
+
+li a:hover{
+	background-color: white;
+	color: black;
+	border-radius: 10px;
+}
+
+#logo{
+	width: 125px;
+	height: 75px;
+	display: inline;
+	float: left;
 }

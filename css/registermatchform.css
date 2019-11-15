@@ -1,0 +1,68 @@
+@media only screen and (max-width: 1000px){
+	#playerTwoGamesInput, #playerTwoPointsInput, #playerTwoGamesWonInput, #playerOneGamesInput, #playerOnePointsInput, #playerOneGamesWonInput{
+		
+	}
+	#player1, #player2, #playerOnePassword, #playerTwoPassword, #locationPlayed{
+		
+	}
+	#p1{
+		padding-top: 20px;
+		margin: auto;
+		clear: both;
+		width: 300px;
+		font-size: 8pt;
+	}
+	#p2{
+		padding-top: 20px;
+		margin: auto;
+		clear: both;
+		width: 300px;
+		font-size: 8pt;
+	}
+}
+@media only screen and (min-width: 1001px){
+	#p1 {
+		float: left;
+		clear: left;
+		padding-left: 17%;'
+	}
+
+	#p2 {
+		float: right;
+		clear: right;
+		padding-right: 17%;
+	}
+	#playerTwoGamesInput, #playerTwoPointsInput, #playerTwoGamesWonInput, #playerOneGamesInput, #playerOnePointsInput, #playerOneGamesWonInput{
+		width: 150px;
+	}
+	#player1, #player2, #playerOnePassword, #playerTwoPassword, #locationPlayed{
+		width: 150px;
+	}
+}
+
+#loc {
+	clear: both;
+}
+#passwords{
+	padding-top: 10px;
+	clear: both;
+	font-weight: bold;
+}
+#subbut{
+	text-decoration: none;
+	border-style: none;
+	width: 75px;
+	height: 50px;
+	border-radius: 5px;	
+	clear: both;
+}
+#subbut:hover{
+	background-color: #add8e6;
+	color: white;
+	box-shadow: 0 0 11px rgba(33,33,33,.2);
+	cursor: pointer;
+}
+
+#player1, #player2, #playerOnePassword, #playerTwoPassword, #locationPlayed{
+	background-color: #dddddd;
+}

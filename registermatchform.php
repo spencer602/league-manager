@@ -42,6 +42,11 @@
                   <br><br>
                   <label id = "playerOneGamesWonLabel">Games won: 0</label><br>
                   <input type = "range" min = "0" max = "9" name = "playerOneGamesWonInput" id = "playerOneGamesWonInput" value = "0">
+                    <br><BR>
+                   <label id = "playerOneEROLabel">EROs: 0</label><Br>
+                   <input type = "range" min = "0" max = "9" name = "playerOneEROInput" id = "playerOneEROInput" value = "0">
+
+
 				</div>
             <div id="p2">
             <h3>Player Two:</h3>
@@ -57,7 +62,15 @@
             <br><br>
             <label id = "playerTwoGamesWonLabel">Games won: 0</label><br>
             <input type = "range" min = "0" max = "9" name = "playerTwoGamesWonInput" id = "playerTwoGamesWonInput" value = "0">
-            <br><br><br><br>
+            <br><br>
+
+                <label id = "playerTwoEROLabel">EROs: 0</label><br>
+                <input type = "range" min = "0" max = "9" name = "playerTwoEROInput" id = "playerTwoEROInput" value = "0">
+
+                <br><br>
+
+
+
             </div>
             <div class="spacer"></div>
             <div id="loc">

@@ -27,7 +27,7 @@
 		</ul>
 	  </div>
          <div id="container">
-            <form action = "registermatch.php" method = "post">
+            <form action = "registermatch.php" method = "post" onsubmit="return validateForm()">
 			   <div id="p1">
                   <h3>Player One:</h3>
                   <select id = "player1" name="player1">

@@ -5,7 +5,7 @@
     <title>Current Standings</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/styles.css">
-	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/standings.css">
 </head>
 <div id="wrapper">
 	<body>
@@ -43,7 +43,7 @@ $allStandings = mysqli_query($connection, "SELECT * from players ORDER BY points
 
 // position is the players position in the rankings
 $position = 0;
-
+echo '<table id="standingsTable"><tr><th>Position</th><th>Points</th><th>Name</th><th>Matches</th><th>Games</th></tr>';
 while ($row = $allStandings->fetch_assoc()) {
     $position++;
     $points = $row['points'];
@@ -54,11 +54,10 @@ while ($row = $allStandings->fetch_assoc()) {
     $matchesPlayed = $row['matches_played'];
 
     // this could be updated to look better
-    echo "$position: $points $name Matches: $matchesWon/$matchesPlayed   Games: $gamesWon/$gamesPlayed<br>";
+    echo "<tr><td>$position</td><td>$points</td><td>$name</td><td>$matchesWon/$matchesPlayed</td><td>$gamesWon/$gamesPlayed</td></tr>";
     
 }
-
-echo "<a href = 'index.php'>Back to Home</a>";?>	
+echo "</table>";?>	
 
 		<div id="footer">
 			<p>Big Sky Shark Hunt, Founded 2019</p>

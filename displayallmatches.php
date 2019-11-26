@@ -5,7 +5,7 @@
     <title>Match History</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/styles.css">
-	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/matchhistory.css">
 </head>
 
 <div id="wrapper">
@@ -42,7 +42,8 @@ if ($connection->connect_error)
 
 // all fields of all matching queries
 $allMatches = mysqli_query($connection, "SELECT * from matches ORDER BY date_and_time DESC");
-
+//echo '<table id="matchTable"><tr><th>Player One</th><th>Points</th><th>Games Won</th><th>Player Two</th><th>Points</th><th>Games Won</th></tr>';
+echo "<h3 id='format'>Player | Points Wagered | Games Won</h3><br>";
 while ($row = $allMatches->fetch_assoc()) {
     $p1id = $row['p1_id'];
     $p2id = $row['p2_id'];
@@ -66,10 +67,13 @@ while ($row = $allMatches->fetch_assoc()) {
     $p2pointsWagered = $row['p2_points_wagered'];
 
     // this could be updated to look better
-    echo "<p>$p1name: $p1gamesWon/$p1gamesToWin vs $p2name: $p2gamesWon/$p2gamesToWin</p>";
-}
-
-echo "<a href = 'index.php'>Back to Home</a>";?>
+	
+    //echo "<tr><td>$p1name</td><td>$p1pointsWagered</td><td>$p1gamesWon/$p1gamesToWin</td></tr>";
+	//echo "<tr><td>$p2name</td><td>$p2pointsWagered</td><td>$p2gamesWon/$p2gamesToWin</td></tr>";
+	echo "<div id='match'><span class='player'>$p1name</span><span class='points'> $p1pointsWagered</span> <span class='wins'>$p1gamesWon/$p1gamesToWin<span><br><span id='versus'>VS.</span><br><span class='player'>$p2name</span> <span class='points'>$p2pointsWagered</span> <span class='wins'>$p2gamesWon/$p2gamesToWin</span></div><hr>";
+	
+}?>
+	<!--</table>-->
 		<div id="footer">
 			<p>Big Sky Shark Hunt, Founded 2019</p>
 		 </div>

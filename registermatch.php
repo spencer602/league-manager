@@ -104,10 +104,38 @@ queryMysql("UPDATE players SET eros = $p1eros, points = $p1TotalPoints, games_pl
 queryMysql("UPDATE players SET eros = $p2eros, points = $p2TotalPoints, games_played = $p2TotalGamesPlayed, games_won = $p2TotalGameWins, 
             matches_played = $p2TotalMatchesPlayed, matches_won = $p2TotalMatchWins WHERE player_id = $p2ID");
 
-queryMysql("UPDATE locations SET games_played = $gamesPlayedAtLocation, matches_played = $matchesPlayedAtLocation WHERE location_id = $locationID ");
+queryMysql("UPDATE locations SET games_played = $gamesPlayedAtLocation, matches_played = $matchesPlayedAtLocation WHERE location_id = $locationID ");?>
 
-
-// this is what is displayed after a match is registered. This could be improved to look better
-
-echo "match registered<br>";
-echo "<a href = 'index.php'>Back to Home</a>";
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Register A Match</title>
+	  <link rel="stylesheet" href="css/styles.css">
+	  <link rel="stylesheet" href="css/registered.css">
+    </head>
+	<div id="wrapper">
+	<body>
+		<div id ="header">
+			<a href="index.php"><img src="images/logo.jpg" id="logo"></a>
+			<div id="pageName">
+				<h1>Big Sky</h1><br>
+				<h1>Shark Hunt</h1><br>
+				<h1>Match Form</h1>
+			</div>
+		</div>
+		<div id="nav">
+			<ul id="navbar">
+				<li><a href = "registermatchform.php">Register</a><br></li>
+				<li><a href = "displayallmatches.php">History</a><br></li>
+				<li><a href = "displaystandings.php">Standings</a></li>
+			</ul>
+		</div>
+		<p id="content">Thank you for registering your match!</p>
+		<div id="footer">
+			<p>Big Sky Shark Hunt, Founded 2019</p>
+		</div>
+     </body>
+	 </div>
+</html>

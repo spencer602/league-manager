@@ -1,0 +1,27 @@
+@media only screen and (width: 320px){
+	td, th{
+		font-size: 10pt;
+	}
+	#format{
+		font-size: 12pt;
+	}
+}
+
+#matchTable{
+	margin: auto;
+}
+
+tr{
+	height: 75px;
+}
+td{
+	width: 75px;
+}
+
+#versus{
+	color: red;
+}
+
+.player{
+	font-weight: bold;
+}

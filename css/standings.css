@@ -1,0 +1,18 @@
+@media only screen and (width: 320px){
+	td, th{
+		font-size: 10pt;
+	}
+}
+
+#standingsTable, th, td {
+	border: 1px solid black; 
+	border-collapse: collapse;
+	margin: auto;
+}
+
+tr{
+	height: 75px;
+}
+td{
+	width: 75px;
+}

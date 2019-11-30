@@ -1,8 +1,63 @@
-@media only screen and (width: 320px){
+@media only screen and (max-width: 1000px){
 	td, th{
-		font-size: 10pt;
+		font-size: 11pt;
+	}
+
+	.positionSpan {
+		font-size: 20pt;
+		font-weight: bold;
+	}
+
+	#standingsTable {
+		width: 85%;
+	}
+
+	.positionTD {
+		width: 20%;
+	}
+
+	.firstRowOfCell {
+		font-size: 16pt;
 	}
 }
+
+@media only screen and (min-width: 1001px){
+	#standingsTable {
+		width: 40%;
+	}
+
+	.positionTD {
+		width: 10%;
+	}
+
+	.firstRowOfCell {
+		font-size: 18pt;
+		padding-bottom: 4px;
+		padding-top: 4px;
+	}
+
+	.secondRowOfCell {
+		font-size: 12pt;
+		padding-bottom: 2px;
+		padding-top: 2px;
+	}
+
+	.thirdRowOfCell {
+		font-size: 12pt;
+		padding-bottom: 2px;
+		padding-top: 2px;
+	}
+
+	.positionSpan {
+		font-size: 24pt;
+		font-weight: bold;
+	}
+}
+
+
+
+
+
 
 #standingsTable, th, td {
 	border: 1px solid black; 
@@ -10,9 +65,3 @@
 	margin: auto;
 }
 
-tr{
-	height: 75px;
-}
-td{
-	width: 75px;
-}

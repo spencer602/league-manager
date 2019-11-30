@@ -43,7 +43,7 @@ $allStandings = mysqli_query($connection, "SELECT * from players ORDER BY points
 
 // position is the players position in the rankings
 $position = 0;
-echo '<table id="standingsTable"><tr><th>Position</th><th>Points</th><th>Name</th><th>Matches</th><th>Games</th></tr>';
+echo '<table id="standingsTable">';
 while ($row = $allStandings->fetch_assoc()) {
     $position++;
     $points = $row['points'];
@@ -52,9 +52,28 @@ while ($row = $allStandings->fetch_assoc()) {
     $gamesPlayed = $row['games_played'];
     $matchesWon = $row['matches_won'];
     $matchesPlayed = $row['matches_played'];
+    $eros = $row['eros'];
+    if ($matchesPlayed > 0) {
+        $matchPercentage = $matchesWon / $matchesPlayed * 100.0;
+        $matchPercentage = number_format((float)$matchPercentage, 1, '.', '');
+
+    } else {
+        $matchPercentage = "NA";
+    }
+
+    if ($gamesPlayed > 0) {
+        $gamePercentage = $gamesWon / $gamesPlayed * 100.0;
+        $gamePercentage = number_format((float)$gamePercentage, 1, '.', '');
+    } else {
+        $gamePercentage = "NA";
+    }
+
 
     // this could be updated to look better
-    echo "<tr><td>$position</td><td>$points</td><td>$name</td><td>$matchesWon/$matchesPlayed</td><td>$gamesWon/$gamesPlayed</td></tr>";
+    echo "<tr><td class = 'positionTD'><span class = 'positionSpan'>$position</span></td>
+        <td><div class = 'firstRowOfCell'>$points $name</div>
+        <div class = 'secondRowOfCell'>Matches: $matchPercentage% ($matchesWon/$matchesPlayed)</div>
+        <div class = 'thirdRowOfCell'>Games: $gamePercentage% ($gamesWon/$gamesPlayed) - ERO: $eros</div></td></tr>";
     
 }
 echo "</table>";?>	

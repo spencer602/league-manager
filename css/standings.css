@@ -9,7 +9,7 @@
 	}
 
 	#standingsTable {
-		width: 85%;
+		width: 100%;
 	}
 
 	.positionTD {
@@ -18,7 +18,23 @@
 
 	.firstRowOfCell {
 		font-size: 16pt;
+		padding-bottom: 4px;
+		padding-top: 4px;
 	}
+
+	.secondRowOfCell {
+		font-size: 12pt;
+		padding-bottom: 2px;
+		padding-top: 2px;
+	}
+
+	.thirdRowOfCell {
+		font-size: 12pt;
+		padding-bottom: 2px;
+		padding-top: 2px;
+	}
+
+}
 }
 
 @media only screen and (min-width: 1001px){

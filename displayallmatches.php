@@ -112,13 +112,17 @@ while ($row = $allMatches->fetch_assoc()) {
     // <span class='points'>$p2pointsWagered</span> <span class='wins'>$p2gamesWon/$p2gamesToWin</span></div><hr>";
 
     echo "<span class = 'matchDiv'>
+            <br><hr><br>
             <div class = 'dateTimeDiv'>$dateTimeString</div>
             <div class = 'winnerDiv'>$winner</div>
-            <div class = 'loserDiv'>$loser</div><br><hr><br>
+            <div class = 'loserDiv'>$loser</div>
           </span>";
 
 }?>
 	<!--</table>-->
+
+        <br><hr><br>
+
 		<div id="footer">
 			<p>Big Sky Shark Hunt, Founded 2019</p>
 		 </div>

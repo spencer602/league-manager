@@ -1,9 +1,19 @@
-@media only screen and (width: 320px){
+@media only screen and (max-width: 1000px){
 	td, th{
 		font-size: 10pt;
 	}
 	#format{
 		font-size: 12pt;
+	}
+
+	hr {
+		width: 100%;
+	}
+}
+
+@media only screen and (min-width: 1001px){
+	hr {
+		width: 50%
 	}
 }
 
@@ -23,5 +33,10 @@ td{
 }
 
 .player{
+	font-weight: bold;
+}
+
+.dateTimeDiv {
+	font-size: 14pt;
 	font-weight: bold;
 }

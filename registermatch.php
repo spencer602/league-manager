@@ -4,6 +4,7 @@ $dbhost  = 'localhost';
 $dbname  = 'sharkhunt';   // Modify these...
 $dbuser  = 'spencer';   // ...variables according
 $dbpass  = 'salute';   // ...to your installation
+$davipass = 'davi2020';
 
 $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($connection->connect_error)
@@ -29,6 +30,11 @@ $formP2GamesWon = $_POST["playerTwoGamesWonInput"];
 $formLocationName = $_POST["locationPlayed"];
 $formP1ERO = $_POST["playerOneEROInput"];
 $formP2ERO = $_POST["playerTwoEROInput"];
+$p1password = $_POST["playerOnePassword"];
+
+if ($davipass != $p1password) {
+    die("invalid passwords");
+}
 
 // queries the player table
 $p1Row = queryMysql("SELECT * FROM players WHERE player_name = '$formP1Name'");

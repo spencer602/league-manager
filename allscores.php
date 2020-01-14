@@ -17,7 +17,7 @@ function allDataAllPlayers() {
 
 // position is the players position in the rankings
     $position = 0;
-    echo '<table id="standingsTable">';
+//    echo '<table id="standingsTable">';
     while ($row = $allStandings->fetch_assoc()) {
         $name = $row['player_name'];
         $playerData =getDataForPlayerID($row['player_id']);

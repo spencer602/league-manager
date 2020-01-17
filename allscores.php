@@ -20,7 +20,7 @@ function allDataAllPlayers() {
 //    echo '<table id="standingsTable">';
     while ($row = $allStandings->fetch_assoc()) {
         $name = $row['player_name'];
-        $playerData =getDataForPlayerID($row['player_id']);
+        $playerData = getDataForPlayerID($row['player_id']);
         $oldPoints = $row['points'];
         $points = 250 + $playerData[0];
 
@@ -50,11 +50,17 @@ for ($i = 0; $i < count($alldata); $i++) {
     echo "$name: $wp ($gamesPlayed)    Win Percentage against > .500 : $wpAgainstBetter<br>";
 }
 
-function sortByWinPercentage($a, $b) {
-    $awp = (float)$a[5]/(float)$a[6];
-    $bwp = (float)$b[5]/(float)$b[6];
+function sortByWinPercentage($a, $b)
+{
+    $awp = (float)$a[5] / (float)$a[6];
+    $bwp = (float)$b[5] / (float)$b[6];
 
     if ($awp == $bwp) return 0;
     return ($awp < $bwp) ? -1 : 1;
 
 }
+
+//function sortByPoints($a, $b) {
+//    if ($a[0] == $b[0]) return 0;
+//    return ($a[0] < $b[0]) ? -1 : 1;
+//}

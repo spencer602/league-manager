@@ -32,7 +32,12 @@ function getDataForPlayerID($playerID) {
     $playerGameWins = 0;
     $playerGames = 0;
     $playerEROs = 0;
+    $names = mysqli_query($connection, "SELECT player_name FROM players WHERE player_id = '$playerID'");
+    $playerName = "Empty, error";
 
+    while ($row = $names->fetch_assoc()) {
+        $playerName = $row['player_name'];
+    }
 
     while ($row = $allMatches->fetch_assoc()) {
 
@@ -89,7 +94,7 @@ function getDataForPlayerID($playerID) {
 
 //    return $playerPoints;
 
-    $playerData = array($playerPoints, $playerMatchWins, $playerMatches, $playerGameWins, $playerGames, $playerEROs);
+    $playerData = array($playerPoints, $playerMatchWins, $playerMatches, $playerGameWins, $playerGames, $playerEROs, $playerID, $playerName);
 
     return $playerData;
 }

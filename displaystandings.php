@@ -32,6 +32,8 @@
 
 include 'calculatescore.php';
 
+include_once 'player.php';
+
 //include 'allscores.php';
 
 
@@ -49,7 +51,6 @@ $allIDs = mysqli_query($connection, "SELECT player_id from players");
 
 $allPlayerData = array();
 
-
 while ($row = $allIDs->fetch_assoc()) {
     $playerID = $row['player_id'];
     $playerData = getDataForPlayerID($playerID);
@@ -66,32 +67,29 @@ echo '<table id="standingsTable">';
 for ($i = 0; $i < count($allPlayerData); $i++) {
     $position++;
     $playerData = $allPlayerData[$i];
-    $points = $playerData[0] + 250;
-    $name = $playerData[7];
-    $gamesWon = $playerData[3];
-    $gamesPlayed = $playerData[4];
-    $matchesWon = $playerData[1];
-    $matchesPlayed = $playerData[2];
-    $eros = $playerData[5];
-    $matchPercentage = "";
-    $gamePercentage = "";
+    $points = $playerData->points + 250;
+    $name = $playerData->name;
+    $gamesWon = $playerData->gamesWon;
+    $gamesPlayed = $playerData->gamesPlayed;
+    $matchesWon = $playerData->matchesWon;
+    $matchesPlayed = $playerData->matchesPlayed;
+    $eros = $playerData->eros;
+    $matchPercentage = $playerData->getMatchPercentage();
+    $gamePercentage = $playerData->getWinPercentage();
 
-    if ($matchesPlayed > 0) {
-        $matchPercentage = $matchesWon / $matchesPlayed * 100.0;
+    if ($matchPercentage != -1) {
         $matchPercentage = number_format((float)$matchPercentage, 1, '.', '');
 
     } else {
         $matchPercentage = "NA";
     }
 
-    if ($gamesPlayed > 0) {
-        $gamePercentage = $gamesWon / $gamesPlayed * 100.0;
+    if ($gamePercentage != -1) {
         $gamePercentage = number_format((float)$gamePercentage, 1, '.', '');
     } else {
         $gamePercentage = "NA";
     }
 
-    // this could be updated to look better
     echo "<tr><td class = 'positionTD'><span class = 'positionSpan'>$position</span></td>
         <td><div class = 'firstRowOfCell'>$points $name</div>
         <div class = 'secondRowOfCell'>Matches: $matchPercentage% ($matchesWon/$matchesPlayed)</div>
@@ -100,8 +98,8 @@ for ($i = 0; $i < count($allPlayerData); $i++) {
 }
 
 function sortByPoints($a, $b) {
-    if ($a[0] == $b[0]) return 0;
-    return ($a[0] < $b[0]) ? 1 : -1;
+    if ($a->points == $b->points) return 0;
+    return ($a->points < $b->points) ? 1 : -1;
 }
 
 

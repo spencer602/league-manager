@@ -1,5 +1,5 @@
 <?php
-
+include_once 'player.php';
 function getDataForPlayerID($playerID) {
     $dbhost  = 'localhost';
 
@@ -94,9 +94,13 @@ function getDataForPlayerID($playerID) {
 
 //    return $playerPoints;
 
-    $playerData = array($playerPoints, $playerMatchWins, $playerMatches, $playerGameWins, $playerGames, $playerEROs, $playerID, $playerName);
 
-    return $playerData;
+    $player = new Player($playerID, $playerName, $playerPoints, $playerGames, $playerGameWins, $playerMatches, $playerMatchWins, $playerEROs);
+
+
+//    $playerData = array($playerPoints, $playerMatchWins, $playerMatches, $playerGameWins, $playerGames, $playerEROs, $playerID, $playerName);
+
+    return $player;
 }
 
 function getWinPercentageGreaterThan($winPercentageThreshold, $playerID) {

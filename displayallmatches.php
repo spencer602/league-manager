@@ -30,26 +30,17 @@
 		<br>
 <?php
 
-$dbhost  = 'localhost';
-
-$dbname  = 'sharkhunt';   // Modify these...
-$dbuser  = 'spencer';   // ...variables according
-$dbpass  = 'salute';   // ...to your installation
-
-$connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-if ($connection->connect_error)
-    die("Fatal Error 1");
+include_once 'sqlscripts.php';
 
 // all fields of all matching queries
-$allMatches = mysqli_query($connection, "SELECT * from matches ORDER BY date_and_time DESC");
-//echo '<table id="matchTable"><tr><th>Player One</th><th>Points</th><th>Games Won</th><th>Player Two</th><th>Points</th><th>Games Won</th></tr>';
-//echo "<h3 id='format'>Player | Points Wagered | Games Won</h3><br>";
+$allMatches = queryDB("SELECT * from matches ORDER BY date_and_time DESC");
+
 while ($row = $allMatches->fetch_assoc()) {
     $p1id = $row['p1_id'];
     $p2id = $row['p2_id'];
 
-    $p1name = mysqli_query($connection, "SELECT player_name FROM players where player_id = '$p1id'");
-    $p2name = mysqli_query($connection, "SELECT player_name FROM players where player_id = '$p2id'");
+    $p1name = queryDB("SELECT player_name FROM players where player_id = '$p1id'");
+    $p2name = queryDB("SELECT player_name FROM players where player_id = '$p2id'");
 
     $p1name = $p1name->fetch_array(MYSQLI_ASSOC);
     $p1name = $p1name['player_name'];
@@ -96,20 +87,11 @@ while ($row = $allMatches->fetch_assoc()) {
             $winner = "$winner  ERO: $p2ero";
         }
 //        $loser = $p1name;
-//
         $loser = "$p1name -$p1pointsWagered: $p1gamesWon/$p1gamesToWin";
         if ($p1ero > 0) {
             $loser = "$loser  ERO: $p1ero";
         }
     }
-
-    // this could be updated to look better
-	
-    //echo "<tr><td>$p1name</td><td>$p1pointsWagered</td><td>$p1gamesWon/$p1gamesToWin</td></tr>";
-	//echo "<tr><td>$p2name</td><td>$p2pointsWagered</td><td>$p2gamesWon/$p2gamesToWin</td></tr>";
-	//echo "<div id='match'><span class='player'>$p1name</span><span class='points'> $p1pointsWagered</span>
-    // <span class='wins'>$p1gamesWon/$p1gamesToWin<span><br><span id='versus'>VS.</span><br><span class='player'>$p2name</span>
-    // <span class='points'>$p2pointsWagered</span> <span class='wins'>$p2gamesWon/$p2gamesToWin</span></div><hr>";
 
     echo "<span class = 'matchDiv'>
             <br><hr><br>

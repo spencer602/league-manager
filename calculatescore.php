@@ -1,38 +1,23 @@
 <?php
 include_once 'player.php';
+include_once 'sqlscripts.php';
+
 function getDataForPlayerID($playerID) {
-    $dbhost  = 'localhost';
 
-    $dbname  = 'sharkhunt';   // Modify these...
-    $dbuser  = 'spencer';   // ...variables according
-    $dbpass  = 'salute';   // ...to your installation
-
-    $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-    if ($connection->connect_error)
-        die("Fatal Error 1");
-
-//$playerID = "5";
-
-// all fields of all matching queries
+    // all fields of all matching queries
     $query = "SELECT p1.player_name AS p1name, p2.player_name AS p2name, p1_points_wagered, p2_points_wagered, 
     p1_games_needed, p2_games_needed, p1_games_won, p2_games_won, p1_ero, p2_ero, date_and_time, location_played, p1_id, p2_id 
             FROM players p1, matches, players p2 
             WHERE p1.player_id = p1_id AND p2.player_id = p2_id AND (p1_id = '$playerID' OR p2_id = '$playerID')
             ORDER BY date_and_time DESC;";
-    $allMatches = mysqli_query($connection, $query);
-
-//    $resultArray = array();
-//    $tempArray = array();
-    $p2Array = array();
-
+    $allMatches = queryDB($query);
     $playerPoints = 0;
-//    $opponentPoints = 0;
     $playerMatchWins = 0;
     $playerMatches = 0;
     $playerGameWins = 0;
     $playerGames = 0;
     $playerEROs = 0;
-    $names = mysqli_query($connection, "SELECT player_name FROM players WHERE player_id = '$playerID'");
+    $names = queryDB("SELECT player_name FROM players WHERE player_id = '$playerID'");
     $playerName = "Empty, error";
 
     while ($row = $names->fetch_assoc()) {
@@ -80,41 +65,12 @@ function getDataForPlayerID($playerID) {
             $playerGameWins += $row['p2_games_won'];
             $playerEROs += $row['p2_ero'];
         }
-
-//    $name = $row['p2name'];
-//
-//    array_push($p2Array, $name);
-
-        // Add each row into our results array
-//    $tempArray = $row;
-//    array_push($resultArray, $tempArray);
     }
-//    $count = count($p2Array);
-//    echo "21 points: $playerPoints";
 
-//    return $playerPoints;
-
-
-    $player = new Player($playerID, $playerName, $playerPoints, $playerGames, $playerGameWins, $playerMatches, $playerMatchWins, $playerEROs);
-
-
-//    $playerData = array($playerPoints, $playerMatchWins, $playerMatches, $playerGameWins, $playerGames, $playerEROs, $playerID, $playerName);
-
-    return $player;
+    return new Player($playerID, $playerName, $playerPoints, $playerGames, $playerGameWins, $playerMatches, $playerMatchWins, $playerEROs);
 }
 
 function getWinPercentageGreaterThan($winPercentageThreshold, $playerID) {
-    $dbhost  = 'localhost';
-
-    $dbname  = 'sharkhunt';   // Modify these...
-    $dbuser  = 'spencer';   // ...variables according
-    $dbpass  = 'salute';   // ...to your installation
-
-    $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-    if ($connection->connect_error)
-        die("Fatal Error 1");
-
-//$playerID = "5";
 
 // all fields of all matching queries
     $query = "SELECT p1.player_name AS p1name, p2.player_name AS p2name, p1_points_wagered, p2_points_wagered, 
@@ -122,20 +78,10 @@ function getWinPercentageGreaterThan($winPercentageThreshold, $playerID) {
             FROM players p1, matches, players p2 
             WHERE p1.player_id = p1_id AND p2.player_id = p2_id AND (p1_id = '$playerID' OR p2_id = '$playerID')
             ORDER BY date_and_time DESC;";
-    $allMatches = mysqli_query($connection, $query);
+    $allMatches = queryDB($query);
 
-//    $resultArray = array();
-//    $tempArray = array();
-    $p2Array = array();
-
-    $playerPoints = 0;
-//    $opponentPoints = 0;
-    $playerMatchWins = 0;
-    $playerMatches = 0;
     $playerGameWins = 0;
     $playerGames = 0;
-    $playerEROs = 0;
-
 
     while ($row = $allMatches->fetch_assoc()) {
         $opponentID = $row['p1_id'];

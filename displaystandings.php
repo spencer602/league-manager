@@ -29,27 +29,11 @@
 		<br>
 <?php
 
-
 include_once 'calculatescore.php';
 include_once 'player.php';
 include_once 'sqlscripts.php';
 
-//include 'allscores.php';
-
-
-//$dbhost  = 'localhost';
-//
-//$dbname  = 'sharkhunt';   // Modify these...
-//$dbuser  = 'spencer';   // ...variables according
-//$dbpass  = 'salute';   // ...to your installation
-//
-//$connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-//if ($connection->connect_error)
-//    die("Fatal Error 1");
-
 $allIDs = queryDB("SELECT player_id from players");
-//$allIDs = mysqli_query($connection, "SELECT player_id from players");
-
 $allPlayerData = array();
 
 while ($row = $allIDs->fetch_assoc()) {
@@ -58,9 +42,7 @@ while ($row = $allIDs->fetch_assoc()) {
     array_push($allPlayerData, $playerData);
 }
 
-
 usort($allPlayerData, "sortByPoints");
-
 $position = 0;
 
 echo '<table id="standingsTable">';
@@ -80,7 +62,6 @@ for ($i = 0; $i < count($allPlayerData); $i++) {
 
     if ($matchPercentage != -1) {
         $matchPercentage = number_format((float)$matchPercentage, 1, '.', '');
-
     } else {
         $matchPercentage = "NA";
     }
@@ -95,7 +76,6 @@ for ($i = 0; $i < count($allPlayerData); $i++) {
         <td><div class = 'firstRowOfCell'>$points $name</div>
         <div class = 'secondRowOfCell'>Matches: $matchPercentage% ($matchesWon/$matchesPlayed)</div>
         <div class = 'thirdRowOfCell'>Games: $gamePercentage% ($gamesWon/$gamesPlayed) - ERO: $eros</div></td></tr>";
-
 }
 
 function sortByPoints($a, $b) {
@@ -103,45 +83,6 @@ function sortByPoints($a, $b) {
     return ($a->points < $b->points) ? 1 : -1;
 }
 
-
-//$allStandings = mysqli_query($connection, "SELECT * from players ORDER BY points DESC");
-//$allStandings =
-
-// position is the players position in the rankings
-//$position = 0;
-//echo '<table id="standingsTable">';
-//while ($row = $allStandings->fetch_assoc()) {
-//    $position++;
-//    $points = $row['points'];
-//    $name = $row['player_name'];
-//    $gamesWon = $row['games_won'];
-//    $gamesPlayed = $row['games_played'];
-//    $matchesWon = $row['matches_won'];
-//    $matchesPlayed = $row['matches_played'];
-//    $eros = $row['eros'];
-//    if ($matchesPlayed > 0) {
-//        $matchPercentage = $matchesWon / $matchesPlayed * 100.0;
-//        $matchPercentage = number_format((float)$matchPercentage, 1, '.', '');
-//
-//    } else {
-//        $matchPercentage = "NA";
-//    }
-//
-//    if ($gamesPlayed > 0) {
-//        $gamePercentage = $gamesWon / $gamesPlayed * 100.0;
-//        $gamePercentage = number_format((float)$gamePercentage, 1, '.', '');
-//    } else {
-//        $gamePercentage = "NA";
-//    }
-//
-//
-//    // this could be updated to look better
-//    echo "<tr><td class = 'positionTD'><span class = 'positionSpan'>$position</span></td>
-//        <td><div class = 'firstRowOfCell'>$points $name</div>
-//        <div class = 'secondRowOfCell'>Matches: $matchPercentage% ($matchesWon/$matchesPlayed)</div>
-//        <div class = 'thirdRowOfCell'>Games: $gamePercentage% ($gamesWon/$gamesPlayed) - ERO: $eros</div></td></tr>";
-//
-//}
 echo "</table>";?>	
 
 		<div id="footer">

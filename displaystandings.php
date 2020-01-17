@@ -30,24 +30,25 @@
 <?php
 
 
-include 'calculatescore.php';
-
+include_once 'calculatescore.php';
 include_once 'player.php';
+include_once 'sqlscripts.php';
 
 //include 'allscores.php';
 
 
-$dbhost  = 'localhost';
+//$dbhost  = 'localhost';
+//
+//$dbname  = 'sharkhunt';   // Modify these...
+//$dbuser  = 'spencer';   // ...variables according
+//$dbpass  = 'salute';   // ...to your installation
+//
+//$connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
+//if ($connection->connect_error)
+//    die("Fatal Error 1");
 
-$dbname  = 'sharkhunt';   // Modify these...
-$dbuser  = 'spencer';   // ...variables according
-$dbpass  = 'salute';   // ...to your installation
-
-$connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
-if ($connection->connect_error)
-    die("Fatal Error 1");
-
-$allIDs = mysqli_query($connection, "SELECT player_id from players");
+$allIDs = queryDB("SELECT player_id from players");
+//$allIDs = mysqli_query($connection, "SELECT player_id from players");
 
 $allPlayerData = array();
 

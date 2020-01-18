@@ -11,10 +11,21 @@ class Player
     public $matchesWon;
     public $eros;
 
-    function __construct($id, $name, $points, $gamesPlayed, $gamesWon, $matchesPlayed, $matchesWon, $eros)
+    /**
+     * Player constructor.
+     * @param $id
+     * @param $name
+     * @param $points
+     * @param $gamesPlayed
+     * @param $gamesWon
+     * @param $matchesPlayed
+     * @param $matchesWon
+     * @param $eros
+     */
+    public function __construct($id, $name, $points, $gamesPlayed, $gamesWon, $matchesPlayed, $matchesWon, $eros)
     {
-        $this->name = $name;
         $this->id = $id;
+        $this->name = $name;
         $this->points = $points;
         $this->gamesPlayed = $gamesPlayed;
         $this->gamesWon = $gamesWon;

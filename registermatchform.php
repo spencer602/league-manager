@@ -31,7 +31,13 @@
 			   <div id="p1">
                   <h3>Player One:</h3>
                   <select id = "player1" name="player1" class = "input">
-                     <?php include 'populateplayerlist.php';?>
+                     <?php
+                     include_once 'helperfunctions.php';
+                     $playerNames = getPlayerNamesForSeason(1);
+                     for ($i = 0; $i < count($playerNames); $i++) {
+                         echo "<option value= \"" . $playerNames[$i] . "\">" . $playerNames[$i] . "</option>";
+                     }
+                     ?>
                   </select>
                   <br><br>
                   <label id = "playerOneGamesLabel" class = "inputLabel">Games to win: 5</label><br>
@@ -51,7 +57,13 @@
             <div id="p2">
             <h3>Player Two:</h3>
             <select id = "player2" name="player2" class = "input">
-				<?php include 'populateplayerlist.php';?>
+                <?php
+                include_once 'helperfunctions.php';
+                $playerNames = getPlayerNamesForSeason(1);
+                for ($i = 0; $i < count($playerNames); $i++) {
+                    echo "<option value= \"" . $playerNames[$i] . "\">" . $playerNames[$i] . "</option>";
+                }
+                ?>
             </select>
             <br><br>
             <label id = "playerTwoGamesLabel" class = "inputLabel">Games to win: 5</label><br>

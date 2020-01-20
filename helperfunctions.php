@@ -12,3 +12,7 @@ function getPlayerNamesForSeason($seasonID) {
     }
     return $playerNames;
 }
+
+function getPlayerRankForID($playerID) {
+
+}

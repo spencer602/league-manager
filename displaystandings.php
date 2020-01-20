@@ -38,7 +38,7 @@ $allPlayerData = array();
 
 while ($row = $allIDs->fetch_assoc()) {
     $playerID = $row['player_id'];
-    $playerData = getDataForPlayerID($playerID);
+    $playerData = getDataForPlayerID($playerID, 1);
     array_push($allPlayerData, $playerData);
 }
 

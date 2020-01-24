@@ -5,6 +5,9 @@ $dbname  = 'sharkhunt';   // Modify these...
 $dbuser  = 'spencer';   // ...variables according
 $dbpass  = 'salute';   // ...to your installation
 
+// app connot register matches at the momemnt
+die("No credentials");
+
 $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($connection->connect_error)
     die("Fatal Error 1");   // if there is a connection error

@@ -33,12 +33,12 @@ include_once 'calculatescore.php';
 include_once 'player.php';
 include_once 'sqlscripts.php';
 
-$allIDs = queryDB("SELECT player_id from players");
+$allIDs = queryDB("SELECT player_id from registrations WHERE season_id = 1");
 $allPlayerData = array();
 
 while ($row = $allIDs->fetch_assoc()) {
     $playerID = $row['player_id'];
-    $playerData = getDataForPlayerID($playerID);
+    $playerData = getDataForPlayerID($playerID, 1);
     array_push($allPlayerData, $playerData);
 }
 

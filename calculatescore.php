@@ -2,13 +2,13 @@
 include_once 'player.php';
 include_once 'sqlscripts.php';
 
-function getDataForPlayerID($playerID) {
+function getDataForPlayerID($playerID, $seasonID) {
 
     // all fields of all matching queries
     $query = "SELECT p1.player_name AS p1name, p2.player_name AS p2name, p1_points_wagered, p2_points_wagered, 
     p1_games_needed, p2_games_needed, p1_games_won, p2_games_won, p1_ero, p2_ero, date_and_time, location_played, p1_id, p2_id 
             FROM players p1, matches, players p2 
-            WHERE p1.player_id = p1_id AND p2.player_id = p2_id AND (p1_id = '$playerID' OR p2_id = '$playerID')
+            WHERE p1.player_id = p1_id AND p2.player_id = p2_id AND (p1_id = '$playerID' OR p2_id = '$playerID') AND season = '$seasonID'
             ORDER BY date_and_time DESC;";
     $allMatches = queryDB($query);
     $playerPoints = 0;

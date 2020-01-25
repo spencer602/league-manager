@@ -24,7 +24,7 @@ function checkForNamesEqual() {
 }
 
 function checkForNoWinner() {
-    if (playerOneGamesWonInput.value != playerOneGamesInput.value && playerTwoGamesWonInput.value != playerTwoGamesInput.value) {
+    if (playerOneGamesWonInput.value != playerOneGamesWonInput.max && playerTwoGamesWonInput.value != playerTwoGamesWonInput.max) {
         alert("Appears that nobody won this match???");
         return false;
     }
@@ -32,7 +32,7 @@ function checkForNoWinner() {
 }
 
 function checkForTwoWinners() {
-    if (playerOneGamesWonInput.value == playerOneGamesInput.value && playerTwoGamesWonInput.value == playerTwoGamesInput.value) {
+    if (playerOneGamesWonInput.value == playerOneGamesWonInput.max && playerTwoGamesWonInput.value == playerTwoGamesWonInput.max) {
         alert("Appears that both of you won this match???");
         return false;
     }
@@ -101,6 +101,9 @@ function bodyLoaded() {
     playerTwoEROsInput = document.getElementById("playerTwoEROInput");
     playerTwoEROsInput.addEventListener("input", changePlayerTwoEROLabel);
 
+    changePlayerOneGamesWonLabel();
+    changePlayerTwoGamesWonLabel();
+
 
 }
 
@@ -116,15 +119,15 @@ function changePlayerTwoEROLabel(event) {
 
 function changePlayerOneGamesWonLabel(event) {
     var playerOneGamesWonLabel = document.getElementById("playerOneGamesWonLabel");
-    playerOneGamesWonLabel.innerHTML = "Games won: " + playerOneGamesWonInput.value;
     playerOneEROsInput.max = playerOneGamesWonInput.value
+    playerOneGamesWonLabel.innerHTML = "Games won: " + playerOneGamesWonInput.value + "/" + playerOneGamesWonInput.max;
     changePlayerOneEROLabel()
 }
 
 function changePlayerTwoGamesWonLabel(event) {
     var playerTwoGamesWonLabel = document.getElementById("playerTwoGamesWonLabel");
-    playerTwoGamesWonLabel.innerHTML = "Games won: " + playerTwoGamesWonInput.value;
     playerTwoEROsInput.max = playerTwoGamesWonInput.value
+    playerTwoGamesWonLabel.innerHTML = "Games won: " + playerTwoGamesWonInput.value + "/" + playerTwoGamesWonInput.max;
     changePlayerTwoEROLabel()
 }
 

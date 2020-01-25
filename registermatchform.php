@@ -23,7 +23,7 @@
         <ul id="navbar">
             <li><a href = "registermatchform.php">Register</a><br></li>
             <li><a href = "displayallmatches.php">History</a><br></li>
-            <li><a href = "displaystandings.php">Standings</a></li>
+            <li><a href = "index.php">Standings</a></li>
         </ul>
     </div>
     <div id="container">
@@ -47,10 +47,10 @@
 <!--                <input type = "range" min = "10" max = "25" step = "5" name = "playerOnePointsInput" id = "playerOnePointsInput"  class = "input"value = "10">-->
 <!--                <br><br>-->
                 <label id = "playerOneGamesWonLabel" class = "inputLabel">Games won: 0</label><br>
-                <input type = "range" min = "0" max = "9" name = "playerOneGamesWonInput" id = "playerOneGamesWonInput"  class = "input"value = "0">
+                <input type = "range" min = "0" max = "7" name = "playerOneGamesWonInput" id = "playerOneGamesWonInput"  class = "input"value = "0">
                 <br><BR>
                 <label id = "playerOneEROLabel" class = "inputLabel">EROs: 0</label><Br>
-                <input type = "range" min = "0" max = "9" name = "playerOneEROInput" id = "playerOneEROInput"  class = "input"value = "0">
+                <input type = "range" min = "0" max = "7" name = "playerOneEROInput" id = "playerOneEROInput"  class = "input"value = "0">
 
 
             </div>
@@ -73,11 +73,11 @@
 <!--                <input type = "range" min = "10" max = "25" step = "5" name = "playerTwoPointsInput" id = "playerTwoPointsInput" class = "input" value = "10">-->
 <!--                <br><br>-->
                 <label id = "playerTwoGamesWonLabel" class = "inputLabel">Games won: 0</label><br>
-                <input type = "range" min = "0" max = "9" name = "playerTwoGamesWonInput" id = "playerTwoGamesWonInput" class = "input" value = "0">
+                <input type = "range" min = "0" max = "7" name = "playerTwoGamesWonInput" id = "playerTwoGamesWonInput" class = "input" value = "0">
                 <br><br>
 
                 <label id = "playerTwoEROLabel" class = "inputLabel">EROs: 0</label><br>
-                <input type = "range" min = "0" max = "9" name = "playerTwoEROInput" id = "playerTwoEROInput" class = "input" value = "0">
+                <input type = "range" min = "0" max = "7" name = "playerTwoEROInput" id = "playerTwoEROInput" class = "input" value = "0">
 
                 <br><br>
 

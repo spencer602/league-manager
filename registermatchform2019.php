@@ -23,7 +23,7 @@
 		 <ul id="navbar">
 				<li><a href = "registermatchform.php">Register</a><br></li>
 				<li><a href = "displayallmatches.php">History</a><br></li>
-				<li><a href = "displaystandings.php">Standings</a></li>
+				<li><a href = "index.php">Standings</a></li>
 		</ul>
 	  </div>
          <div id="container">

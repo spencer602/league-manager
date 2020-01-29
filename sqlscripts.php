@@ -5,6 +5,8 @@ $dbname  = 'sharkhunt';   // Modify these...
 $dbuser  = 'spencer';   // ...variables according
 $dbpass = 'salute';   // ...to your installation
 
+$globalVar = 2;
+
 $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($connection->connect_error)
     die("Fatal Error 1");

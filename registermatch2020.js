@@ -8,11 +8,23 @@ var playerOneEROsInput;
 var playerTwoEROsInput;
 
 function validateForm() {
-    if (!checkForNoWinner()) {
-        return false;
-    }
+    if (!checkForPlayersNotSelected()) { return false; }
+    if (!checkForNoWinner()) { return false; }
     if (!checkForTwoWinners()) { return false; }
     if (!checkForNamesEqual()) { return false; }
+    if (!checkForValidERO()) { return false; }
+}
+
+function checkForValidERO() {
+    if (playerOneEROsInput.value > playerOneGamesWonInput.value) {
+        alert("Player One ERO count invalid");
+        return false;
+    }
+    if (playerTwoEROsInput.value > playerTwoGamesWonInput.value) {
+        alert("Player Two ERO count invalid");
+        return false;
+    }
+    return true;
 }
 
 function checkForNamesEqual() {
@@ -39,20 +51,35 @@ function checkForTwoWinners() {
     return true;
 }
 
+function checkForPlayersNotSelected() {
+    if (playerOneInput.value == "none") {
+        alert("Player 1 not selected");
+        return false;
+    }
+    if (playerTwoInput.value == "none") {
+        alert("Player 2 not selected");
+        return false
+    }
+    return true;
+}
+
 function setRaces() {
+    var playerOneName = document.getElementById("player1").value;
+    var playerTwoName = document.getElementById("player2").value;
+
+    if (playerOneName == "none" || playerTwoName == "none") { return; }
+
     var http = new XMLHttpRequest();
     var url = 'getplayerrank.php';
-    var playerName = document.getElementById("player1").value;
     var params = 'player_name=';
-    params = params.concat(playerName);
+    params = params.concat(playerOneName);
     http.open('POST', url, false);
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     http.send(params);
     var playerOneRank = parseInt(http.responseText);
 
-    playerName = document.getElementById("player2").value;
     params = 'player_name=';
-    params = params.concat(playerName);
+    params = params.concat(playerTwoName);
     http.open('POST', url, false);
     http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     http.send(params);
@@ -77,6 +104,8 @@ function setRaces() {
 }
 
 function bodyLoaded() {
+
+    // playerOneEROsInput.max = 100;
     // player name inputs
     playerOneInput = document.getElementById("player1");
     playerOneInput.addEventListener("change", changePlayerOnePasswordName);
@@ -119,14 +148,14 @@ function changePlayerTwoEROLabel(event) {
 
 function changePlayerOneGamesWonLabel(event) {
     var playerOneGamesWonLabel = document.getElementById("playerOneGamesWonLabel");
-    playerOneEROsInput.max = playerOneGamesWonInput.value
+    // playerOneEROsInput.max = playerOneGamesWonInput.value
     playerOneGamesWonLabel.innerHTML = "Games won: " + playerOneGamesWonInput.value + "/" + playerOneGamesWonInput.max;
     changePlayerOneEROLabel()
 }
 
 function changePlayerTwoGamesWonLabel(event) {
     var playerTwoGamesWonLabel = document.getElementById("playerTwoGamesWonLabel");
-    playerTwoEROsInput.max = playerTwoGamesWonInput.value
+    // playerTwoEROsInput.max = playerTwoGamesWonInput.value
     playerTwoGamesWonLabel.innerHTML = "Games won: " + playerTwoGamesWonInput.value + "/" + playerTwoGamesWonInput.max;
     changePlayerTwoEROLabel()
 }

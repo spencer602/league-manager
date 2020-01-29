@@ -14,8 +14,11 @@ $formP2GamesWon = $_POST["playerTwoGamesWonInput"];
 $formLocationName = $_POST["locationPlayed"];
 $formP1ERO = $_POST["playerOneEROInput"];
 $formP2ERO = $_POST["playerTwoEROInput"];
-$p1password = $_POST["playerOnePassword"];
-$p2password = $_POST["playerTwoPassword"];
+$tourneyID = $_POST['tourneyID'];
+$round = $_POST['roundNumber'];
+
+//$p1password = $_POST["playerOnePassword"];
+//$p2password = $_POST["playerTwoPassword"];
 
 $formP1GamesToWin = 7;
 $formP2GamesToWin = 7;
@@ -39,8 +42,8 @@ $p2Rank = $p2Row['rank'];
 $seasonID = 2;
 $defaultPaidNo = 0;
 
-if (!password_verify($p1password, $p1Hash)) { die("Invalid Password for $formP1Name"); }
-if (!password_verify($p2password, $p2Hash)) { die("Invalid Password for $formP2Name"); }
+//if (!password_verify($p1password, $p1Hash)) { die("Invalid Password for $formP1Name"); }
+//if (!password_verify($p2password, $p2Hash)) { die("Invalid Password for $formP2Name"); }
 
 
 if ($p1Rank <= $p2Rank) {
@@ -67,6 +70,13 @@ $insertQueryString = "INSERT INTO matches
 
 // send the query to the database
 queryDB($insertQueryString);
+
+$data = queryDB("SELECT match_id FROM matches ORDER BY match_id DESC;");
+$row = $data->fetch_assoc();
+$matchID = $row['match_id'];
+
+$query = "INSERT INTO tournament_matches (tournament_id, match_id, round) VALUES ($tourneyID, $matchID, $round);";
+queryDB($query);
 
 //queryDB("SELECT match_id FROM matches ORDER BY match_id;")
 
@@ -123,41 +133,41 @@ queryDB($insertQueryString);
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-   <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Register A Match</title>
-	  <link rel="stylesheet" href="css/styles.css">
-	  <link rel="stylesheet" href="css/registered.css">
-    </head>
-	<div id="wrapper">
-	<body>
-		<div id ="header">
-			<a href="index.php"><img src="images/logo.jpg" id="logo"></a>
-			<div id="pageName">
-				<h1>Big Sky</h1><br>
-				<h1>Shark Hunt</h1><br>
-				<h1>Match Form</h1>
-			</div>
-		</div>
-		<div id="nav">
-			<ul id="navbar">
-				<li><a href = "registermatchform.php">Register</a><br></li>
-				<li><a href = "displayallmatches.php">History</a><br></li>
-				<li><a href = "index.php">Standings</a></li>
-			</ul>
-		</div>
-        <?php
-        include_once 'sqlscripts.php';
-        $data = queryDB("SELECT match_id FROM matches ORDER BY match_id DESC;");
-        $row = $data->fetch_assoc();
-        $matchID = $row['match_id'];
-        echo '<p id="content">Thank you for registering your match!<br>';
-        echo "Please write your match ID on your envelope! Match ID: $matchID</p>";
-        ?>
-		<div id="footer">
-			<p>Big Sky Shark Hunt, Founded 2019</p>
-		</div>
-     </body>
-	 </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register A Match</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/registered.css">
+</head>
+<div id="wrapper">
+    <body>
+    <div id ="header">
+        <a href="index.php"><img src="images/logo.jpg" id="logo"></a>
+        <div id="pageName">
+            <h1>Big Sky</h1><br>
+            <h1>Shark Hunt</h1><br>
+            <h1>Match Form</h1>
+        </div>
+    </div>
+    <div id="nav">
+        <ul id="navbar">
+            <li><a href = "registermatchform.php">Register</a><br></li>
+            <li><a href = "displayallmatches.php">History</a><br></li>
+            <li><a href = "index.php">Standings</a></li>
+        </ul>
+    </div>
+    <?php
+    include_once 'sqlscripts.php';
+    $data = queryDB("SELECT match_id FROM matches ORDER BY match_id DESC;");
+    $row = $data->fetch_assoc();
+    $matchID = $row['match_id'];
+    echo '<p id="content">Thank you for registering your match!<br>';
+    echo "Please write your match ID on your envelope! Match ID: $matchID</p>";
+    ?>
+    <div id="footer">
+        <p>Big Sky Shark Hunt, Founded 2019</p>
+    </div>
+    </body>
+</div>
 </html>

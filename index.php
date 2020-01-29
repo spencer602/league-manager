@@ -33,12 +33,14 @@ include_once 'calculatescore.php';
 include_once 'player.php';
 include_once 'sqlscripts.php';
 
-$allIDs = queryDB("SELECT player_id from registrations WHERE season_id = 1");
+$seasonID = 2;
+
+$allIDs = queryDB("SELECT player_id from registrations WHERE season_id = $seasonID");
 $allPlayerData = array();
 
 while ($row = $allIDs->fetch_assoc()) {
     $playerID = $row['player_id'];
-    $playerData = getDataForPlayerID($playerID, 1);
+    $playerData = getDataForPlayerID($playerID, $seasonID);
     array_push($allPlayerData, $playerData);
 }
 
@@ -51,6 +53,7 @@ for ($i = 0; $i < count($allPlayerData); $i++) {
     $position++;
     $playerData = $allPlayerData[$i];
     $points = $playerData->points + 250;
+    $rank = $playerData->rank;
     $name = $playerData->name;
     $gamesWon = $playerData->gamesWon;
     $gamesPlayed = $playerData->gamesPlayed;
@@ -73,13 +76,18 @@ for ($i = 0; $i < count($allPlayerData); $i++) {
     }
 
     echo "<tr><td class = 'positionTD'><span class = 'positionSpan'>$position</span></td>
-        <td><div class = 'firstRowOfCell'>$points $name</div>
+        <td><div class = 'firstRowOfCell'>$points $name: $rank</div>
         <div class = 'secondRowOfCell'>Matches: $matchPercentage% ($matchesWon/$matchesPlayed)</div>
         <div class = 'thirdRowOfCell'>Games: $gamePercentage% ($gamesWon/$gamesPlayed) - ERO: $eros</div></td></tr>";
 }
 
 function sortByPoints($a, $b) {
-    if ($a->points == $b->points) return 0;
+    if ($a->points == $b->points){
+        if ($a->getWinPercentage() == $b->getWinPercentage()) {
+            return 0;
+        }
+        return ($a->getWinPercentage() < $b->getWinPercentage()) ? 1 : -1;
+    }
     return ($a->points < $b->points) ? 1 : -1;
 }
 

@@ -27,7 +27,7 @@
         </ul>
     </div>
     <div id="container">
-        <form action = "registermatch.php" method = "post" onsubmit="return validateForm()">
+        <form action = "registertourneymatch.php" method = "post" onsubmit="return validateForm()">
             <div id="p1">
                 <h3>Player One:</h3>
                 <select id = "player1" name="player1" class = "input">
@@ -41,12 +41,12 @@
                     ?>
                 </select>
                 <br><br>
-<!--                <label id = "playerOneGamesLabel" class = "inputLabel">Games to win: 5</label><br>-->
-<!--                <input type = "range" min = "5" max = "9" name = "playerOneGamesInput" id = "playerOneGamesInput"  class = "input"value = "5">-->
-<!--                <br><br>-->
-<!--                <label id = "playerOnePointsLabel" class = "inputLabel">Points to wager: 10</label><br>-->
-<!--                <input type = "range" min = "10" max = "25" step = "5" name = "playerOnePointsInput" id = "playerOnePointsInput"  class = "input"value = "10">-->
-<!--                <br><br>-->
+                <!--                <label id = "playerOneGamesLabel" class = "inputLabel">Games to win: 5</label><br>-->
+                <!--                <input type = "range" min = "5" max = "9" name = "playerOneGamesInput" id = "playerOneGamesInput"  class = "input"value = "5">-->
+                <!--                <br><br>-->
+                <!--                <label id = "playerOnePointsLabel" class = "inputLabel">Points to wager: 10</label><br>-->
+                <!--                <input type = "range" min = "10" max = "25" step = "5" name = "playerOnePointsInput" id = "playerOnePointsInput"  class = "input"value = "10">-->
+                <!--                <br><br>-->
                 <label id = "playerOneGamesWonLabel" class = "inputLabel">Games won: 0</label><br>
                 <input type = "range" min = "0" max = "7" name = "playerOneGamesWonInput" id = "playerOneGamesWonInput"  class = "input"value = "0">
                 <br><BR>
@@ -68,12 +68,12 @@
                     ?>
                 </select>
                 <br><br>
-<!--                <label id = "playerTwoGamesLabel" class = "inputLabel">Games to win: 5</label><br>-->
-<!--                <input type = "range" min = "5" max = "9" name = "playerTwoGamesInput" id = "playerTwoGamesInput" class = "input" value = "5">-->
-<!--                <br><br>-->
-<!--                <label id = "playerTwoPointsLabel" class = "inputLabel">Points to wager: 10</label><br>-->
-<!--                <input type = "range" min = "10" max = "25" step = "5" name = "playerTwoPointsInput" id = "playerTwoPointsInput" class = "input" value = "10">-->
-<!--                <br><br>-->
+                <!--                <label id = "playerTwoGamesLabel" class = "inputLabel">Games to win: 5</label><br>-->
+                <!--                <input type = "range" min = "5" max = "9" name = "playerTwoGamesInput" id = "playerTwoGamesInput" class = "input" value = "5">-->
+                <!--                <br><br>-->
+                <!--                <label id = "playerTwoPointsLabel" class = "inputLabel">Points to wager: 10</label><br>-->
+                <!--                <input type = "range" min = "10" max = "25" step = "5" name = "playerTwoPointsInput" id = "playerTwoPointsInput" class = "input" value = "10">-->
+                <!--                <br><br>-->
                 <label id = "playerTwoGamesWonLabel" class = "inputLabel">Games won: 0</label><br>
                 <input type = "range" min = "0" max = "7" name = "playerTwoGamesWonInput" id = "playerTwoGamesWonInput" class = "input" value = "0">
                 <br><br>
@@ -92,11 +92,11 @@
                 </select>
             </div><br>
             <div id="passwords">
-                <label id = "playerOnePasswordLabel">Player One Password:</label><br>
-                <input type = "password" name = "playerOnePassword" id = "playerOnePassword" class = "input" oninput='inputBoxChange("playerOnePassword")'>
+                <label id = "tourneyIDLabel">Tourney ID:</label><br>
+                <input type = "text" name = "tourneyID" id = "tourneyID" class = "input" oninput='inputBoxChange("playerOnePassword")'>
                 <br><br>
-                <label id = "playerTwoPasswordLabel">Player Two Password:</label><br>
-                <input type = "password" name = "playerTwoPassword" id = "playerTwoPassword" class = "input" oninput='inputBoxChange("playerTwoPassword")'>
+                <label id = "roundLabel">Round Number:</label><br>
+                <input type = "text" name = "roundNumber" id = "roundNumber" class = "input" oninput='inputBoxChange("playerTwoPassword")'>
                 <br><br><br>
             </div>
             <div class="spacer"></div><br>

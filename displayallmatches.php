@@ -31,11 +31,46 @@
 <?php
 
 include_once 'sqlscripts.php';
+include_once 'helperfunctions.php';
+
+$seasonID = 2;
 
 // all fields of all matching queries
-$allMatches = queryDB("SELECT * from matches ORDER BY date_and_time DESC");
+$allMatches = queryDB("SELECT * from matches WHERE season = $seasonID ORDER BY date_and_time DESC");
+
+$tourneyMatchIDs = getAllTourneyMatchIDsForSeason(2);
+$tourneyIDsThatHaveBeenDisplayed = array();
 
 while ($row = $allMatches->fetch_assoc()) {
+
+    $matchID = $row['match_id'];
+
+    if (in_array($matchID, $tourneyMatchIDs)) {
+        $row = queryDB("SELECT tournament_id FROM tournament_matches WHERE match_id = '$matchID';");
+        $row = $row->fetch_array(MYSQLI_ASSOC);
+        $tourneyID = $row['tournament_id'];
+
+        if (!in_array($tourneyID, $tourneyIDsThatHaveBeenDisplayed)) {
+            echo '<br><hr><br>';
+
+
+            $tourneyData = queryDB("SELECT date FROM tournaments WHERE tournament_id = '$tourneyID';");
+            $tourneyDate = $tourneyData->fetch_array(MYSQLI_ASSOC)['date'];
+
+            $tourneyTime = DateTime::createFromFormat('Y-m-d', $tourneyDate);
+            $dateString = $tourneyTime->format('D, M d');
+
+            echo "<div class = 'dateTimeDiv'>$dateString</div>";
+            echo "<div class = 'dateTimeDiv'>Tournament Results:</div>";
+
+            displayTourneyResults($tourneyID);
+
+            array_push($tourneyIDsThatHaveBeenDisplayed, $tourneyID);
+        }
+        continue;
+    }
+
+
     $p1id = $row['p1_id'];
     $p2id = $row['p2_id'];
 
@@ -99,6 +134,8 @@ while ($row = $allMatches->fetch_assoc()) {
             <div class = 'winnerDiv'>$winner</div>
             <div class = 'loserDiv'>$loser</div>
           </span>";
+
+
 
 }?>
 	<!--</table>-->

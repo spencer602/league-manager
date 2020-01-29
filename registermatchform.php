@@ -24,6 +24,8 @@
             <li><a href = "registermatchform.php">Register</a><br></li>
             <li><a href = "displayallmatches.php">History</a><br></li>
             <li><a href = "index.php">Standings</a></li>
+            <li><a href = "players.php">Players</a></li>
+
         </ul>
     </div>
     <div id="container">

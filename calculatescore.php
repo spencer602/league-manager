@@ -3,6 +3,26 @@ include_once 'player.php';
 include_once 'sqlscripts.php';
 include_once 'helperfunctions.php';
 
+
+
+function getPlayerPosition($playerID, $seasonID) {
+    $thisPlayer = getDataForPlayerID($playerID, $seasonID);
+    $query = "SELECT player_id FROM registrations WHERE season_id = '$seasonID';";
+    $players = queryDB($query);
+    $allPlayers = array();
+    while ($player = $players->fetch_assoc()) {
+        $newPlayer = getDataForPlayerID($player['player_id'], $seasonID);
+        array_push($allPlayers, $newPlayer);
+    }
+    usort($allPlayers, "sortByPoints");
+
+    for ($i = 0; $i < count($allPlayers); $i++) {
+        if ($allPlayers[$i]->id == $thisPlayer->id ) { return $i + 1; }
+    }
+
+    return -1;
+}
+
 function getDataForPlayerID($playerID, $seasonID) {
 
     // all fields of all matching queries
@@ -21,16 +41,18 @@ function getDataForPlayerID($playerID, $seasonID) {
     $playerEROs = 0;
     $names = queryDB("SELECT * FROM players WHERE player_id = '$playerID'");
     $playerName = "Empty, error";
+    $phoneNumber = "";
 
     $listOfTourneyMatchIDs = getAllTourneyMatchIDsForSeason($seasonID);
 
     while ($row = $names->fetch_assoc()) {
         $playerName = $row['player_name'];
         $rank = $row['rank'];
+        $phoneNumber = $row['phone'];
+
     }
 
     while ($row = $allMatches->fetch_assoc()) {
-
         $matchID = $row['match_id'];
 
         $isTourneyMatch = false;
@@ -90,7 +112,7 @@ function getDataForPlayerID($playerID, $seasonID) {
         $playerPoints += $tourneyPoints;
     }
 
-    return new Player($playerID, $playerName, $rank, $playerPoints, $playerGames, $playerGameWins, $playerMatches, $playerMatchWins, $playerEROs);
+    return new Player($playerID, $playerName, $rank, $playerPoints, $playerGames, $playerGameWins, $playerMatches, $playerMatchWins, $playerEROs, $phoneNumber);
 }
 
 function getWinPercentageGreaterThan($winPercentageThreshold, $playerID) {
@@ -121,5 +143,7 @@ function getWinPercentageGreaterThan($winPercentageThreshold, $playerID) {
     if ($playerGames == 0) return "NA";
     return $playerGameWins / $playerGames;
 }
+
+
 
 

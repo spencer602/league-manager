@@ -24,7 +24,9 @@
 				<li><a href = "registermatchform.php">Register</a><br></li>
 				<li><a href = "displayallmatches.php">History</a><br></li>
 				<li><a href = "index.php">Standings</a></li>
-			</ul>
+                <li><a href = "players.php">Players</a></li>
+
+            </ul>
 		</div>
 		<br>
 <?php
@@ -76,7 +78,7 @@ for ($i = 0; $i < count($allPlayerData); $i++) {
     }
 
     echo "<tr><td class = 'positionTD'><span class = 'positionSpan'>$position</span></td>
-        <td><div class = 'firstRowOfCell'>$points $name: $rank</div>
+        <td><div class = 'firstRowOfCell'>$points $name</div>
         <div class = 'secondRowOfCell'>Matches: $matchPercentage% ($matchesWon/$matchesPlayed)</div>
         <div class = 'thirdRowOfCell'>Games: $gamePercentage% ($gamesWon/$gamesPlayed) - ERO: $eros</div></td></tr>";
 }

@@ -11,6 +11,7 @@ class Player
     public $matchesPlayed;
     public $matchesWon;
     public $eros;
+    public $phoneNumber;
 
     /**
      * Player constructor.
@@ -23,8 +24,9 @@ class Player
      * @param $matchesPlayed
      * @param $matchesWon
      * @param $eros
+     * @param $phoneNumber
      */
-    public function __construct($id, $name, $rank, $points, $gamesPlayed, $gamesWon, $matchesPlayed, $matchesWon, $eros)
+    public function __construct($id, $name, $rank, $points, $gamesPlayed, $gamesWon, $matchesPlayed, $matchesWon, $eros, $phoneNumber)
     {
         $this->id = $id;
         $this->name = $name;
@@ -35,6 +37,7 @@ class Player
         $this->matchesPlayed = $matchesPlayed;
         $this->matchesWon = $matchesWon;
         $this->eros = $eros;
+        $this->phoneNumber = $phoneNumber;
     }
 
     function getMatchPercentage() {

@@ -39,7 +39,6 @@
         <label id = "sortLabel">Sort By:
         </label><br>
         <select id = "sortBy" name="sortBy" class = "input" onchange="sortFormChanged()">
-            <option value="none" selected disabled hidden>Sort by...</option>
             <option value = "name">Name</option>
             <option value = "points">Points</option>
             <option value = "rank">Rank</option>

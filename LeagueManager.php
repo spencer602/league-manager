@@ -46,4 +46,8 @@ class LeagueManager
         }
         return null;
     }
+
+    public function getAllPlayerData() {
+        return $this->allPlayers;
+    }
 }

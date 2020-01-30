@@ -16,7 +16,7 @@
         <div id="pageName">
             <h1>Big Sky</h1><br>
             <h1>Shark Hunt</h1><br>
-            <h1>Current Standings</h1>
+            <h1>Player List</h1>
         </div>
     </div>
     <div id="nav">
@@ -55,18 +55,16 @@
     include_once 'calculatescore.php';
     include_once 'player.php';
     include_once 'sqlscripts.php';
-    
+    include_once 'leaguemanager.php';
+
 
     $seasonID = 2;
 
-    $allIDs = queryDB("SELECT player_id from registrations WHERE season_id = $seasonID");
-    $allPlayerData = array();
+    $leagueManager = new LeagueManager();
+    $leagueManager->updateForSeason($seasonID);
 
-    while ($row = $allIDs->fetch_assoc()) {
-        $playerID = $row['player_id'];
-        $playerData = getDataForPlayerID($playerID, $seasonID);
-        array_push($allPlayerData, $playerData);
-    }
+    $allPlayerData = $leagueManager->getAllPlayerData();
+
 
     if ($_POST['sortBy'] == "name") {
         usort($allPlayerData, "sortByName");
@@ -102,10 +100,11 @@
 
     echo '<table id="standingsTable">';
 
+
     for ($i = 0; $i < count($allPlayerData); $i++) {
         $playerData = $allPlayerData[$i];
 
-        $position = getPlayerPosition($playerData->id, $seasonID);
+        $position = $leagueManager->getPositionForPlayerWithID($playerData->id);
         $points = $playerData->points + 250;
         $rank = $playerData->rank;
         $name = $playerData->name;

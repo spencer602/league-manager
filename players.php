@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/standings.css">
 </head>
+<script src = "players.js"></script>
 <div id="wrapper">
-    <body>
+    <body onload="bodyLoaded()">
     <div id="header">
         <div id="logo">
             <a href="index.php"><img src="images/logo.jpg" id="logo"></a><br>
@@ -30,9 +31,28 @@
     </div>
     <br>
 
-    <form action = "players.php" method = "post">
-        <label id = "sortLabel">Sort Players By...</label><br>
-        <select id = "sortBy" name="sortBy" class = "input">
+    <form action = "players.php" method = "post" id = "sortForm">
+        <label id = "sortLabel">
+
+
+        <?php
+        $sortBy = $_POST['sortBy'];
+        if ($sortBy == 'points') { echo 'Sort by points'; }
+        else if ($sortBy == 'rank') { echo 'Sort by rank'; }
+        else if ($sortBy == 'gamePercentage') { echo 'Sort by game win percentage'; }
+        else if ($sortBy == 'ero') { echo 'Sort by EROs'; }
+        else if ($sortBy == 'gamesPlayed') { echo 'Sort by games played'; }
+        else if ($sortBy == 'matchesPlayed') { echo 'Sort by matches played'; }
+        else if ($sortBy == 'gamesWon') { echo 'Sort by games won'; }
+        else if ($sortBy == 'matchesWon') { echo 'Sort by matches won'; }
+        else { echo 'Sort by name'; }
+
+
+
+        ?>
+
+        </label><br>
+        <select id = "sortBy" name="sortBy" class = "input" onchange="sortFormChanged()">
             <option value="none" selected disabled hidden>Sort by...</option>
             <option value = "name">Name</option>
             <option value = "points">Points</option>
@@ -46,7 +66,6 @@
 
         </select>
 
-        <input type = "submit" id="subbut" value = "Sort">
     </form>
     <br><hr><br>
 
@@ -96,9 +115,7 @@
     else {
         usort($allPlayerData, "sortByName");
     }
-//    $position = 0;
 
-    echo '<table id="standingsTable">';
 
 
     for ($i = 0; $i < count($allPlayerData); $i++) {
@@ -196,8 +213,7 @@
         return ($a->matchesWon < $b->matchesWon) ? 1 : -1;
     }
 
-
-    echo "</table>";?>
+    ?>
 
     <div id="footer">
         <p>Big Sky Shark Hunt, Founded 2019</p>

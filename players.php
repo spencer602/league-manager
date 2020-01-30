@@ -9,7 +9,10 @@
 </head>
 <script src = "players.js"></script>
 <div id="wrapper">
-    <body onload="bodyLoaded()">
+    <?php
+    $val = $_POST['sortBy'];
+    echo "<body onload = \"bodyLoaded('$val')\">"
+    ?>
     <div id="header">
         <div id="logo">
             <a href="index.php"><img src="images/logo.jpg" id="logo"></a><br>
@@ -30,27 +33,10 @@
         </ul>
     </div>
     <br>
+    <div id = 'testDiv'></div>
 
     <form action = "players.php" method = "post" id = "sortForm">
-        <label id = "sortLabel">
-
-
-        <?php
-        $sortBy = $_POST['sortBy'];
-        if ($sortBy == 'points') { echo 'Sort by points'; }
-        else if ($sortBy == 'rank') { echo 'Sort by rank'; }
-        else if ($sortBy == 'gamePercentage') { echo 'Sort by game win percentage'; }
-        else if ($sortBy == 'ero') { echo 'Sort by EROs'; }
-        else if ($sortBy == 'gamesPlayed') { echo 'Sort by games played'; }
-        else if ($sortBy == 'matchesPlayed') { echo 'Sort by matches played'; }
-        else if ($sortBy == 'gamesWon') { echo 'Sort by games won'; }
-        else if ($sortBy == 'matchesWon') { echo 'Sort by matches won'; }
-        else { echo 'Sort by name'; }
-
-
-
-        ?>
-
+        <label id = "sortLabel">Sort By:
         </label><br>
         <select id = "sortBy" name="sortBy" class = "input" onchange="sortFormChanged()">
             <option value="none" selected disabled hidden>Sort by...</option>

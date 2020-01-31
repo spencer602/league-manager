@@ -24,8 +24,10 @@ $queryString = "UPDATE registrations SET paid = 1 WHERE player_id = $playerID AN
 // send the query to the database
 queryDB($queryString);
 
-$queryString = "UPDATE players SET phone = '$phoneNumber' WHERE player_id = '$playerID'";
-queryDB($queryString);
+if ($phoneNumber != "") {
+    $queryString = "UPDATE players SET phone = '$phoneNumber' WHERE player_id = '$playerID'";
+    queryDB($queryString);
+}
 
 
 ?>

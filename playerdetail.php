@@ -37,12 +37,15 @@
 include_once "sqlscripts.php";
 include_once "helperfunctions.php";
 include_once "calculatescore.php";
+include_once "LeagueManager.php";
 
+$leagueManager = new LeagueManager();
+$leagueManager->updateForSeason(2);
 
 $playerID = $_GET['id'];
 
 $player = getDataForPlayerID($playerID, 2);
-$position = getPlayerPosition($playerID, 2);
+$position = $leagueManager->getPositionForPlayerWithID($playerID);
 $name = $player->name;
 $points = $player->points + 250;
 $rank = $player->rank;

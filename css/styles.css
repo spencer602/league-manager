@@ -127,6 +127,10 @@ li a:hover{
 	border-radius: 10px;
 }
 
+li a:visited {
+	color: white;
+}
+
 #logo{
 	width: 125px;
 	height: 75px;
@@ -137,4 +141,9 @@ li a:hover{
 .playerhref {
 	text-decoration: none;
 }
+
+a:visited {
+	color: blue;
+}
+
 

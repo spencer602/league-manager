@@ -39,7 +39,7 @@ include_once "helperfunctions.php";
 include_once "calculatescore.php";
 
 
-$playerID = 86;
+$playerID = $_GET['id'];
 
 $player = getDataForPlayerID($playerID, 2);
 $position = getPlayerPosition($playerID, 2);
@@ -74,11 +74,13 @@ echo "<div>Skill Rank (1-4): $rank</div>";
 echo "<div>Matches: $matchPercentage% ($matchesWon/$matchesPlayed)";
 echo "<div>Games: $gamePercentage% ($gamesWon/$gamesPlayed)";
 echo "<div>EROs: $eros";
-echo "<div>Phone: $phoneNumber<br><br>";
+echo "<div>Phone: $phoneNumber<br><br><hr><br>";
+echo "<div class = 'firstRowOfCell'>Matches Played:</div>";
 
 
 displayAllMatches(2, $playerID);
 
+echo '<br><hr><br>';
 
 
 

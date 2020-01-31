@@ -36,6 +36,8 @@ function displayTourneyResults($tourneyID) {
 
     while ($row = $tourneyData->fetch_assoc()) {
         $name = getPlayerNameForID($row['player_id']);
+        $id = $row['player_id'];
+        $name = "<a class = 'playerhref' href = 'playerdetail.php?id=$id'>$name</a>";
         $result = $row['position'];
         $points = $row['points'];
         $plusSign = $points > 0 ? "+" : "";
@@ -78,9 +80,11 @@ function displayTourneyMatches($tourneyID) {
 
         $p1name = $p1name->fetch_array(MYSQLI_ASSOC);
         $p1name = $p1name['player_name'];
+        $p1name = "<a class = 'playerhref' href = 'playerdetail.php?id=$p1id'>$p1name</a>";
 
         $p2name = $p2name->fetch_array(MYSQLI_ASSOC);
         $p2name = $p2name['player_name'];
+        $p2name = "<a class = 'playerhref' href = 'playerdetail.php?id=$p2id'>$p2name</a>";
 
         $p1gamesToWin = intval($match['p1_games_needed']);
         $p2gamesToWin = intval($match['p2_games_needed']);
@@ -188,9 +192,11 @@ function displayAllMatches($seasonID, $playerID)
 
         $p1name = $p1name->fetch_array(MYSQLI_ASSOC);
         $p1name = $p1name['player_name'];
+        $p1name = "<a class = 'playerhref' href = 'playerdetail.php?id=$p1id'>$p1name</a>";
 
         $p2name = $p2name->fetch_array(MYSQLI_ASSOC);
         $p2name = $p2name['player_name'];
+        $p2name = "<a class = 'playerhref' href = 'playerdetail.php?id=$p2id'>$p2name</a>";
 
         $p1gamesToWin = intval($row['p1_games_needed']);
         $p2gamesToWin = intval($row['p2_games_needed']);
@@ -243,6 +249,7 @@ function displayAllMatches($seasonID, $playerID)
             <div class = 'winnerDiv'>$winner</div>
             <div class = 'loserDiv'>$loser</div>
           </span>";
+
     }
 }
 

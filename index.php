@@ -54,6 +54,7 @@ echo '<table id="standingsTable">';
 for ($i = 0; $i < count($allPlayerData); $i++) {
     $position++;
     $playerData = $allPlayerData[$i];
+    $playerID = $playerData->id;
     $points = $playerData->points + 250;
     $rank = $playerData->rank;
     $name = $playerData->name;
@@ -76,9 +77,8 @@ for ($i = 0; $i < count($allPlayerData); $i++) {
     } else {
         $gamePercentage = "NA";
     }
-
     echo "<tr><td class = 'positionTD'><span class = 'positionSpan'>$position</span></td>
-        <td><div class = 'firstRowOfCell'>$points $name</div>
+        <td><div class = 'firstRowOfCell'>$points <a class = 'playerhref' href = 'playerdetail.php?id=$playerID'>$name</a></div>
         <div class = 'secondRowOfCell'>Matches: $matchPercentage% ($matchesWon/$matchesPlayed)</div>
         <div class = 'thirdRowOfCell'>Games: $gamePercentage% ($gamesWon/$gamesPlayed) - ERO: $eros</div></td></tr>";
 }

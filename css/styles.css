@@ -133,3 +133,8 @@ li a:hover{
 	display: inline;
 	float: left;
 }
+
+.playerhref {
+	text-decoration: none;
+}
+

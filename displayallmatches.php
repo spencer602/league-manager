@@ -37,6 +37,7 @@ include_once 'helperfunctions.php';
 
 displayAllMatches(2, null);
 
+echo '<br><hr><br>';
 
 
 
@@ -47,7 +48,6 @@ displayAllMatches(2, null);
 ?>
 	<!--</table>-->
 
-        <br><hr><br>
 
 		<div id="footer">
 			<p>Big Sky Shark Hunt, Founded 2019</p>

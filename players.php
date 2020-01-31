@@ -105,11 +105,12 @@
 
     for ($i = 0; $i < count($allPlayerData); $i++) {
         $playerData = $allPlayerData[$i];
-
-        $position = $leagueManager->getPositionForPlayerWithID($playerData->id);
+        $id = $playerData->id;
+        $position = $leagueManager->getPositionForPlayerWithID($id);
         $points = $playerData->points + 250;
         $rank = $playerData->rank;
         $name = $playerData->name;
+        $name = "<a class = 'playerhref' href = 'playerdetail.php?id=$id'>$name</a>";
         $gamesWon = $playerData->gamesWon;
         $gamesPlayed = $playerData->gamesPlayed;
         $matchesWon = $playerData->matchesWon;

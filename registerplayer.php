@@ -1,5 +1,13 @@
 <?php
 
+
+session_start();
+
+if ($_SESSION['adminLoggedIn'] != 1) {
+    header("location: adminloginform.php");
+}
+
+
 include_once 'sqlscripts.php';
 
 // gathers the data from the form
@@ -22,6 +30,8 @@ $playerID = $playerData['player_id'];
 
 // the query we are using for inserting the match into the table
 $queryString = "UPDATE players SET password = '$hash' WHERE player_id = $playerID;";
+
+
 
 // send the query to the database
 queryDB($queryString);

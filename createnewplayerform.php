@@ -7,12 +7,13 @@ if ($_SESSION['adminLoggedIn'] != 1) {
 ?>
 
 
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register A Player</title>
+    <title>Create a new Player</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/registermatchform.css">
 </head>
@@ -24,7 +25,7 @@ if ($_SESSION['adminLoggedIn'] != 1) {
         <div id="pageName">
             <h1>Big Sky</h1><br>
             <h1>Shark Hunt</h1><br>
-            <h1>Register Player</h1>
+            <h1>Create Player</h1>
         </div>
     </div>
     <div id="nav">
@@ -32,36 +33,26 @@ if ($_SESSION['adminLoggedIn'] != 1) {
             <li><a href = "registermatchform.php">Register</a><br></li>
             <li><a href = "displayallmatches.php">History</a><br></li>
             <li><a href = "index.php">Standings</a></li>
-        </ul>
-    </div>
-    <div id="container">
-        <form action = "registertournamentresult.php" method = "post">
-            <div id="p1">
-                <h3>Player:</h3>
-                <select id = "player" name="player" class = "input">
-                    <?php
-                    include_once 'helperfunctions.php';
-                    $playerNames = getPlayerNamesForSeason(2);
-                    for ($i = 0; $i < count($playerNames); $i++) {
-                        echo "<option value= \"" . $playerNames[$i] . "\">" . $playerNames[$i] . "</option>";
-                    }
-                    ?>
-                </select>
-                <br><br>
+            <li><a href = "players.php">Players</a></li>
 
-            </div>
+        </ul>
+    </div><br><br>
+    <div id="container">
+        <form action = "createplayer.php" method = "post">
+
 
             <div id="passwords">
-                <label id = "tournamentIDLabel">Tournament ID:</label><br>
-                <input type = "text" name = "tournamentID" id = "tournamentID" class = "input">
+                <label id = "nameLabel">Player Name:</label><br>
+                <input type = "text" name = "name" class = "input">
                 <br><br>
-                <label id = "pointsLabel">Points:</label><br>
-                <input type = "text" name = "points" id = "points" class = "input">
+                <label id = "phoneLabel">Phone Number:</label><br>
+                <input type = "text" name = "phone" class = "input">
                 <br><br>
-
+                <label id = "rankLabel">Player Rank:</label><br>
+                <input type = "text" name = "rank" class = "input">
+                <br><br>
                 <br>
             </div>
-            <div class="spacer"></div><br>
             <input type = "submit" id="subbut">
         </form>
         <br>

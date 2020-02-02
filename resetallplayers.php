@@ -1,4 +1,13 @@
 <?php
+
+
+session_start();
+
+if ($_SESSION['adminLoggedIn'] != 1) {
+    header("location: adminloginform.php");
+}
+
+
 $dbhost  = 'localhost';
 
 $dbname  = 'sharkhunt';   // Modify these...

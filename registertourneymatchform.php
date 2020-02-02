@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if ($_SESSION['adminLoggedIn'] != 1) {
+    header("location: adminloginform.php");
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -16,7 +25,7 @@
         <div id="pageName">
             <h1>Big Sky</h1><br>
             <h1>Shark Hunt</h1><br>
-            <h1>Match Form</h1>
+            <h1>Tourney Match Form</h1>
         </div>
     </div>
     <div id="nav">

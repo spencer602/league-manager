@@ -6,45 +6,25 @@ if ($_SESSION['adminLoggedIn'] != 1) {
     header("location: adminloginform.php");
 }
 
-
 include_once 'sqlscripts.php';
 
-// gathers the data from the form
-$formPName = $_POST["player"];
-$phoneNumber = $_POST["phoneNumber"];
+$rank = $_POST['rank'];
+$name = $_POST['name'];
+$phone = $_POST['phone'];
 
-
-
-// queries the player table
-
-$player = queryDB("SELECT player_id FROM players WHERE player_name = '$formPName'");
-$playerData = $player->fetch_array(MYSQLI_ASSOC);
-$playerID = $playerData['player_id'];
-
-$seasonID = 2;
-
-
-
-// the query we are using for inserting the match into the table
-$queryString = "UPDATE registrations SET paid = 1 WHERE player_id = $playerID AND season_id = $seasonID";
-
-// send the query to the database
-queryDB($queryString);
-
-if ($phoneNumber != "") {
-    $queryString = "UPDATE players SET phone = '$phoneNumber' WHERE player_id = '$playerID'";
-    queryDB($queryString);
+if ($rank >= 1 && $rank <= 4) {
+    queryDB("INSERT INTO players (player_name, phone, rank) VALUES ('$name', '$phone', $rank);");
 }
 
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register A Player</title>
+    <title>Create A Player</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/registered.css">
 </head>
@@ -55,7 +35,7 @@ if ($phoneNumber != "") {
         <div id="pageName">
             <h1>Big Sky</h1><br>
             <h1>Shark Hunt</h1><br>
-            <h1>Match Form</h1>
+            <h1>Create Player</h1>
         </div>
     </div>
     <div id="nav">
@@ -65,7 +45,7 @@ if ($phoneNumber != "") {
             <li><a href = "index.php">Standings</a></li>
         </ul>
     </div>
-    <p id="content">Thank you for marking the player as paid!</p>
+    <p id="content">Thank you for creating the player!</p>
     <div id="footer">
         <p>Big Sky Shark Hunt, Founded 2019</p>
     </div>

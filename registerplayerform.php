@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+if ($_SESSION['adminLoggedIn'] != 1) {
+    header("location: adminloginform.php");
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -45,9 +55,6 @@
             </div>
 
             <div id="passwords">
-                <label id = "adminPasswordLabel">Admin Password:</label><br>
-                <input type = "password" name = "adminPassword" id = "adminPassword" class = "input">
-                <br><br>
                 <label id = "playerPasswordLabel">New Player Password:</label><br>
                 <input type = "password" name = "playerPassword" id = "playerPassword" class = "input">
                 <br><br>

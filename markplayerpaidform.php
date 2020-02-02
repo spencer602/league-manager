@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if ($_SESSION['adminLoggedIn'] != 1) {
+    header("location: adminloginform.php");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>

@@ -1,4 +1,12 @@
 <?php
+
+session_start();
+
+if ($_SESSION['adminLoggedIn'] != 1) {
+    header("location: adminloginform.php");
+}
+
+
 include_once 'sqlscripts.php';
 
 $query = "SELECT player_name from players, registrations 

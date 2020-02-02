@@ -1,5 +1,13 @@
 <?php
 
+
+session_start();
+
+if ($_SESSION['adminLoggedIn'] != 1) {
+    header("location: adminloginform.php");
+}
+
+
 include_once 'sqlscripts.php';
 
 // gathers the data from the form

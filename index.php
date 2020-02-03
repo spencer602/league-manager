@@ -1,35 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <title>Current Standings</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="css/styles.css">
-	<link rel="stylesheet" href="css/standings.css">
-</head>
-<div id="wrapper">
-	<body>
-		<div id="header">
-			<div id="logo">
-			<a href="index.php"><img src="images/logo.jpg" id="logo"></a><br>
-			</div>
-			<div id="pageName">
-			<h1>Big Sky</h1><br>
-			<h1>Shark Hunt</h1><br>
-			<h1>Current Standings</h1>
-			</div>
-		</div>
-		<div id="nav">
-			<ul id="navbar">
-				<li><a href = "registermatchform.php">Register</a><br></li>
-				<li><a href = "displayallmatches.php">History</a><br></li>
-				<li><a href = "index.php">Standings</a></li>
-                <li><a href = "players.php">Players</a></li>
 
-            </ul>
-		</div>
-		<br>
 <?php
+require 'header.php';
+
+echo "<script>setTitle('Current Standings')</script>";
+echo "<script>setCurrentPage('Current Standings')</script>";
 
 include_once 'calculatescore.php';
 include_once 'player.php';

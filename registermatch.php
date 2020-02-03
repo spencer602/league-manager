@@ -39,9 +39,12 @@ $p2Rank = $p2Row['rank'];
 $seasonID = 2;
 $defaultPaidNo = 0;
 
-if (!password_verify($p1password, $p1Hash)) { die("Invalid Password for $formP1Name"); }
-if (!password_verify($p2password, $p2Hash)) { die("Invalid Password for $formP2Name"); }
+session_start();
 
+if ($_SESSION['adminLoggedIn'] != 1) {
+    if (!password_verify($p1password, $p1Hash)) { die("Invalid Password for $formP1Name"); }
+    if (!password_verify($p2password, $p2Hash)) { die("Invalid Password for $formP2Name"); }
+}
 
 if ($p1Rank <= $p2Rank) {
     $formP1GamesToWin = 7;

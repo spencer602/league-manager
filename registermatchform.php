@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <div id = 'wrapper'>
+    <script src="registermatch2020.js"></script>
+    <script src="inputBoxChange.js"></script>
 
     <?php
 require 'header.php';
 echo "<link rel=\"stylesheet\" href=\"css/registermatchform.css\">";
-echo "<body>";
+echo "<body onload = 'bodyLoaded()'>";
 echo "<script>setTitle('Register Match')</script>";
 echo "<script>setCurrentPage('Register Match')</script>";
 ?>
+
     <div id="container">
         <form action = "registermatch.php" method = "post" onsubmit="return validateForm()">
             <div id="p1">

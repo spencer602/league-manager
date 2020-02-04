@@ -11,7 +11,7 @@ echo "<body onload = \"bodyLoaded('$val')\">";
 echo "<script>setTitle('Players')</script>";
 echo "<script>setCurrentPage('Players')</script>";
 ?>
-
+    <br>
     <form action = "players.php" method = "post" id = "sortForm">
         <label id = "sortLabel">Sort By:
         </label><br>
@@ -37,7 +37,6 @@ echo "<script>setCurrentPage('Players')</script>";
     include_once 'player.php';
     include_once 'sqlscripts.php';
     include_once 'leaguemanager.php';
-
 
     $seasonID = 2;
 

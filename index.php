@@ -9,6 +9,8 @@ echo "<body>";
 echo "<script>setTitle('Current Standings')</script>";
 echo "<script>setCurrentPage('Current Standings')</script>";
 
+echo '<br>';
+
 include_once 'calculatescore.php';
 include_once 'player.php';
 include_once 'sqlscripts.php';

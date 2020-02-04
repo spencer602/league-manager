@@ -1,9 +1,13 @@
-<?php
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<div id = 'wrapper'>
 
-require 'header.php';
+    <?php
+    require 'header.php';
 
-echo "<script>setTitle('Match History')</script>";
-echo "<script>setCurrentPage('Match History')</script>";
+    echo "<body>";
+    echo "<script>setTitle('Match History')</script>";
+    echo "<script>setCurrentPage('Match History')</script>";
 
 include_once 'sqlscripts.php';
 include_once 'helperfunctions.php';

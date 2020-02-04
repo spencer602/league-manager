@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+
 <head>
     <meta charset="utf-8">
     <title id = 'pageTitle'>Current Standings</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/standings.css">
-</head>
-<script src = "general.js"></script>
+    <script src = "general.js"></script>
 
-<div id="wrapper">
-    <body>
     <div id="header">
         <div id="logo">
             <a href="index.php"><img src="images/logo.jpg" id="logo"></a><br>
@@ -31,3 +27,4 @@
         </ul>
     </div>
     <br>
+</head>

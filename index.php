@@ -1,7 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<div id = 'wrapper'>
 
 <?php
 require 'header.php';
 
+echo "<body>";
 echo "<script>setTitle('Current Standings')</script>";
 echo "<script>setCurrentPage('Current Standings')</script>";
 
@@ -72,6 +76,7 @@ echo "</table>";?>
 		<div id="footer">
 			<p>Big Sky Shark Hunt, Founded 2019</p>
 		 </div>
-	</body>
+    </body>
 </div>
+
 </html>

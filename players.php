@@ -1,39 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <title>Players</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/standings.css">
-</head>
-<script src = "players.js"></script>
-<div id="wrapper">
-    <?php
-    $val = $_POST['sortBy'];
-    echo "<body onload = \"bodyLoaded('$val')\">"
-    ?>
-    <div id="header">
-        <div id="logo">
-            <a href="index.php"><img src="images/logo.jpg" id="logo"></a><br>
-        </div>
-        <div id="pageName">
-            <h1>Big Sky</h1><br>
-            <h1>Shark Hunt</h1><br>
-            <h1>Player List</h1>
-        </div>
-    </div>
-    <div id="nav">
-        <ul id="navbar">
-            <li><a href = "registermatchform.php">Register</a><br></li>
-            <li><a href = "displayallmatches.php">History</a><br></li>
-            <li><a href = "index.php">Standings</a></li>
-            <li><a href = "players.php">Players</a></li>
+<div id = 'wrapper'>
 
-        </ul>
-    </div>
-    <br>
-    <div id = 'testDiv'></div>
+<?php
+require 'header.php';
+$val = $_POST['sortBy'];
+echo "<script src = 'general.js'></script>";
+echo "<script src = 'players.js'></script>";
+echo "<body onload = \"bodyLoaded('$val')\">";
+echo "<script>setTitle('Players')</script>";
+echo "<script>setCurrentPage('Players')</script>";
+?>
 
     <form action = "players.php" method = "post" id = "sortForm">
         <label id = "sortLabel">Sort By:

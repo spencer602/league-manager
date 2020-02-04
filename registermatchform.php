@@ -1,33 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register A Match</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/registermatchform.css">
-</head>
-<script src="registermatch2020.js"></script>
-<script src="inputBoxChange.js"></script>
-<div id="wrapper">
-    <body onload="bodyLoaded()">
-    <div id ="header">
-        <a href="index.php"><img src="images/logo.jpg" id="logo"></a>
-        <div id="pageName">
-            <h1>Big Sky</h1><br>
-            <h1>Shark Hunt</h1><br>
-            <h1>Match Form</h1>
-        </div>
-    </div>
-    <div id="nav">
-        <ul id="navbar">
-            <li><a href = "registermatchform.php">Register</a><br></li>
-            <li><a href = "displayallmatches.php">History</a><br></li>
-            <li><a href = "index.php">Standings</a></li>
-            <li><a href = "players.php">Players</a></li>
+<div id = 'wrapper'>
 
-        </ul>
-    </div>
+    <?php
+require 'header.php';
+echo "<link rel=\"stylesheet\" href=\"css/registermatchform.css\">";
+echo "<body>";
+echo "<script>setTitle('Register Match')</script>";
+echo "<script>setCurrentPage('Register Match')</script>";
+?>
     <div id="container">
         <form action = "registermatch.php" method = "post" onsubmit="return validateForm()">
             <div id="p1">

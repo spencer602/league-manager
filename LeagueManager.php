@@ -1,6 +1,8 @@
 <?php
 include_once 'sqlscripts.php';
 include_once 'player.php';
+include_once 'guihelperfunctions.php';
+
 
 function sortByPointsThenMatchPercentage($a, $b) {
     if ($a->points == $b->points){

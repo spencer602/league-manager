@@ -18,7 +18,7 @@ echo "<script>setCurrentPage('Players')</script>";
         <select id = "sortBy" name="sortBy" class = "input" onchange="sortFormChanged()">
             <option value = "name">Name</option>
             <option value = "points">Points</option>
-            <option value = "rank">Rank</option>
+            <option value = "rank">Skill Rank</option>
             <option value = "gamePercentage">Game Win Percentage</option>
             <option value = "ero">EROs</option>
             <option value = "gamesPlayed">Games Played</option>

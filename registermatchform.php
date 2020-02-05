@@ -5,12 +5,15 @@
     <script src="inputBoxChange.js"></script>
 
     <?php
-require 'header.php';
-echo "<link rel=\"stylesheet\" href=\"css/registermatchform.css\">";
-echo "<body onload = 'bodyLoaded()'>";
-echo "<script>setTitle('Register Match')</script>";
-echo "<script>setCurrentPage('Register Match')</script>";
-?>
+    include_once 'LeagueManager.php';
+    require 'header.php';
+    echo "<link rel=\"stylesheet\" href=\"css/registermatchform.css\">";
+    echo "<body onload = 'bodyLoaded()'>";
+    echo "<script>setTitle('Register Match')</script>";
+    echo "<script>setCurrentPage('Register Match')</script>";
+    $leagueManager = new LeagueManager();
+    $leagueManager->updateForSeason(2);
+    ?>
 
     <div id="container">
         <form action = "registermatch.php" method = "post" onsubmit="return validateForm()">
@@ -19,8 +22,7 @@ echo "<script>setCurrentPage('Register Match')</script>";
                 <select id = "player1" name="player1" class = "input">
                     <option value="none" selected disabled hidden>Select Player 1</option>
                     <?php
-                    include_once 'helperfunctions.php';
-                    $playerNames = getPlayerNamesForSeason(2);
+                    $playerNames = $leagueManager->getAllNamesInAlphabeticalOrder();
                     for ($i = 0; $i < count($playerNames); $i++) {
                         echo "<option value= \"" . $playerNames[$i] . "\">" . $playerNames[$i] . "</option>";
                     }
@@ -46,8 +48,6 @@ echo "<script>setCurrentPage('Register Match')</script>";
                 <select id = "player2" name="player2" class = "input">
                     <option value="none" selected disabled hidden>Select Player 2</option>
                     <?php
-                    include_once 'helperfunctions.php';
-                    $playerNames = getPlayerNamesForSeason(2);
                     for ($i = 0; $i < count($playerNames); $i++) {
                         echo "<option value= \"" . $playerNames[$i] . "\">" . $playerNames[$i] . "</option>";
                     }
@@ -74,7 +74,12 @@ echo "<script>setCurrentPage('Register Match')</script>";
             <div id="loc">
                 <h3>Location:</h3>
                 <select id = "locationPlayed" name= "locationPlayed" class = "input">
-                    <?php include 'populatelocationlist.php';?>
+                    <?php
+                    $locations = $leagueManager::getLocationList();
+                    for ($i = 0; $i < count($locations); $i++) {
+                        echo "<option value= \"" . $locations[$i] . "\">" . $locations[$i] . "</option>";
+                    }
+                    ?>
                 </select>
             </div><br>
             <div id="passwords">

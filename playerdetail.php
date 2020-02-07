@@ -13,9 +13,6 @@ echo "<script>setCurrentPage('Player Detail')</script>";
     <br>
 
 <?php
-include_once "sqlscripts.php";
-include_once "helperfunctions.php";
-include_once "calculatescore.php";
 include_once "LeagueManager.php";
 
 $leagueManager = new LeagueManager();
@@ -23,7 +20,7 @@ $leagueManager->updateForSeason(2);
 
 $playerID = $_GET['id'];
 
-$player = getDataForPlayerID($playerID, 2);
+$player = $leagueManager->getPlayerWithID($playerID);
 $position = $leagueManager->getPositionForPlayerWithID($playerID);
 $name = $player->name;
 $points = $player->points + 250;
@@ -59,12 +56,11 @@ echo "<div>EROs: $eros";
 echo "<div>Phone: $phoneNumber<br><br><hr><br>";
 echo "<div class = 'firstRowOfCell'>Matches Played:</div>";
 
+$matches = $leagueManager::getAllMatchesFor(2, $playerID, null);
 
-displayAllMatches(2, $playerID);
+guidisplayAllMatches($matches);
 
 echo '<br><hr><br>';
-
-
 
 ?>
 

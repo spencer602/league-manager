@@ -2,7 +2,7 @@
 include_once 'sqlscripts.php';
 include_once 'player.php';
 include_once 'guihelperfunctions.php';
-
+include_once 'match.php';
 
 function sortByPointsThenMatchPercentage($a, $b) {
     if ($a->points == $b->points){
@@ -21,12 +21,7 @@ function sortByNameAlphabetical($a, $b) {
 
 class LeagueManager
 {
-    public $allPlayers;
-
-    public function __construct()
-    {
-        $this->allPlayers = array();
-    }
+    public $allPlayers = array();
 
     static function getLocationList()
     {
@@ -37,6 +32,12 @@ class LeagueManager
             array_push($locations, $row['location_name']);
         }
         return $locations;
+    }
+
+    static function getPlayerNameFromID($id) {
+        $data = queryDB("SELECT player_name FROM players WHERE player_id = '$id';");
+        $player = $data->fetch_array(MYSQLI_ASSOC);
+        return $player['player_name'];
     }
 
     public function addMatch($p1name, $p2name, $p1gamesWon, $p2gamesWon, $p1ero, $p2ero, $locationName, $p1password, $p2password, $seasonID) {
@@ -128,6 +129,19 @@ class LeagueManager
 
     public function getAllPlayerData() {
         return $this->allPlayers;
+    }
+
+    public static function getTournamentResultsFor($tourneyID) {
+        $tourneyData = queryDB("SELECT * FROM tournament_results WHERE tournament_id = '$tourneyID' ORDER BY position;");
+        $tourneyResults = array();
+        while ($row = $tourneyData->fetch_assoc()) {
+            $id = $row['player_id'];
+            $name = LeagueManager::getPlayerNameFromID($row['player_id']);
+            $result = $row['position'];
+            $points = $row['points'];
+            array_push($tourneyResults, [$name, $result, $points, $id]);
+        }
+        return $tourneyResults;
     }
 
     public function getAllNamesInAlphabeticalOrder() {
@@ -244,5 +258,34 @@ class LeagueManager
         }
 
         return new Player($playerID, $playerName, $rank, $playerPoints, $playerGames, $playerGameWins, $playerMatches, $playerMatchWins, $playerEROs, $phoneNumber);
+    }
+
+    static function getAllMatchesFor($seasonID, $playerID, $tourneyID)
+    {
+        // all fields of all matching queries
+        $query = "";
+        if ($tourneyID != null) {
+            $query = "SELECT * FROM matches, tournament_matches WHERE matches.match_id = tournament_matches.match_id AND tournament_id = '$tourneyID' ORDER BY round;";
+        }
+        else if ($playerID == null) {
+            $query = "SELECT * from matches WHERE season = $seasonID ORDER BY date_and_time DESC;";
+        } else {
+            $query = "SELECT * from matches WHERE season = $seasonID AND (p1_id = '$playerID' OR p2_id = '$playerID') ORDER BY date_and_time DESC;";
+        }
+        $allMatches = queryDB($query);
+
+        //$tourneyMatchIDs = getAllTourneyMatchIDsForSeason(2);
+//        $tourneyIDsThatHaveBeenDisplayed = array();
+
+        $allMatchesArray = array();
+
+        while ($row = $allMatches->fetch_assoc()) {
+            $match = new Match($row['p1_id'], $row['p2_id'], $row['location_played'], $row['season'], $row['p1_games_needed'],
+               $row['p1_games_won'], $row['p1_ero'], $row['p2_games_needed'], $row['p2_games_won'], $row['p2_ero'], $row['p1_rank'],
+               $row['p2_rank'], $row['date_and_time'], $row['match_id'], $row['paid'], $row['p1_points_wagered'], $row['p2_points_wagered'], $row['round']);
+
+            array_push($allMatchesArray, $match);
+        }
+        return $allMatchesArray;
     }
 }

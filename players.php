@@ -25,59 +25,29 @@ echo "<script>setCurrentPage('Players')</script>";
             <option value = "matchesPlayed">Matches Played</option>
             <option value = "gamesWon">Games Won</option>
             <option value = "matchesWon">Matches Won</option>
-
         </select>
-
     </form>
     <br><hr><br>
 
     <?php
 
-    include_once 'calculatescore.php';
-    include_once 'player.php';
-    include_once 'sqlscripts.php';
-    include_once 'leaguemanager.php';
+    include_once 'LeagueManager.php';
 
     $seasonID = 2;
-
     $leagueManager = new LeagueManager();
     $leagueManager->updateForSeason($seasonID);
-
     $allPlayerData = $leagueManager->getAllPlayerData();
 
-
-    if ($_POST['sortBy'] == "name") {
-        usort($allPlayerData, "sortByName");
-    }
-    else if ($_POST['sortBy'] == "points") {
-        usort($allPlayerData, "sortByPoints");
-    }
-    else if ($_POST['sortBy'] == "rank") {
-        usort($allPlayerData, "sortByRank");
-    }
-    else if ($_POST['sortBy'] == "gamePercentage") {
-        usort($allPlayerData, "sortByWinPercentage");
-    }
-    else if ($_POST['sortBy'] == "ero") {
-        usort($allPlayerData, "sortByERO");
-    }
-    else if ($_POST['sortBy'] == "gamesPlayed") {
-        usort($allPlayerData, "sortByGamesPlayed");
-    }
-    else if ($_POST['sortBy'] == "matchesPlayed") {
-        usort($allPlayerData, "sortByMatchesPlayed");
-    }
-    else if ($_POST['sortBy'] == "gamesWon") {
-        usort($allPlayerData, "sortByGamesWon");
-    }
-    else if ($_POST['sortBy'] == "matchesWon") {
-        usort($allPlayerData, "sortByMatchesWon");
-    }
-    else {
-        usort($allPlayerData, "sortByName");
-    }
-
-
+    if ($_POST['sortBy'] == "name") { usort($allPlayerData, "sortByName"); }
+    else if ($_POST['sortBy'] == "points") { usort($allPlayerData, "sortByPoints"); }
+    else if ($_POST['sortBy'] == "rank") { usort($allPlayerData, "sortByRank"); }
+    else if ($_POST['sortBy'] == "gamePercentage") { usort($allPlayerData, "sortByWinPercentage"); }
+    else if ($_POST['sortBy'] == "ero") { usort($allPlayerData, "sortByERO"); }
+    else if ($_POST['sortBy'] == "gamesPlayed") { usort($allPlayerData, "sortByGamesPlayed"); }
+    else if ($_POST['sortBy'] == "matchesPlayed") { usort($allPlayerData, "sortByMatchesPlayed"); }
+    else if ($_POST['sortBy'] == "gamesWon") { usort($allPlayerData, "sortByGamesWon"); }
+    else if ($_POST['sortBy'] == "matchesWon") { usort($allPlayerData, "sortByMatchesWon"); }
+    else { usort($allPlayerData, "sortByName"); }
 
     for ($i = 0; $i < count($allPlayerData); $i++) {
         $playerData = $allPlayerData[$i];
@@ -118,11 +88,6 @@ echo "<script>setCurrentPage('Players')</script>";
         echo "<div>Phone: $phoneNumber";
 
         echo "<br><br><hr><br>";
-
-//        echo "<tr><td class = 'positionTD'><span class = 'positionSpan'>$position</span></td>
-//        <td><div class = 'firstRowOfCell'>$points $name: $rank</div>
-//        <div class = 'secondRowOfCell'>Matches: $matchPercentage% ($matchesWon/$matchesPlayed)</div>
-//        <div class = 'thirdRowOfCell'>Games: $gamePercentage% ($gamesWon/$gamesPlayed) - ERO: $eros</div></td></tr>";
     }
 
     function sortByName($a, $b) {

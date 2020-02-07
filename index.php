@@ -11,22 +11,18 @@ echo "<script>setCurrentPage('Current Standings')</script>";
 
 echo '<br>';
 
-include_once 'calculatescore.php';
-include_once 'player.php';
-include_once 'sqlscripts.php';
+//include_once 'calculatescore.php';
+//include_once 'player.php';
+//include_once 'sqlscripts.php';
+include_once 'LeagueManager.php';
 
 $seasonID = 2;
 
-$allIDs = queryDB("SELECT player_id from registrations WHERE season_id = $seasonID");
-$allPlayerData = array();
+$leagueManager = new LeagueManager();
+$leagueManager->updateForSeason($seasonID);
+$allPlayerData = $leagueManager->getAllPlayerData();
 
-while ($row = $allIDs->fetch_assoc()) {
-    $playerID = $row['player_id'];
-    $playerData = getDataForPlayerID($playerID, $seasonID);
-    array_push($allPlayerData, $playerData);
-}
-
-usort($allPlayerData, "sortByPoints");
+usort($allPlayerData, "sortByPointsThenMatchPercentage");
 $position = 0;
 
 echo '<table id="standingsTable">';
@@ -61,16 +57,6 @@ for ($i = 0; $i < count($allPlayerData); $i++) {
         <td><div class = 'firstRowOfCell'>$points <a class = 'playerhref' href = 'playerdetail.php?id=$playerID'>$name</a></div>
         <div class = 'secondRowOfCell'>Matches: $matchPercentage% ($matchesWon/$matchesPlayed)</div>
         <div class = 'thirdRowOfCell'>Games: $gamePercentage% ($gamesWon/$gamesPlayed) - ERO: $eros</div></td></tr>";
-}
-
-function sortByPoints($a, $b) {
-    if ($a->points == $b->points){
-        if ($a->getWinPercentage() == $b->getWinPercentage()) {
-            return 0;
-        }
-        return ($a->getWinPercentage() < $b->getWinPercentage()) ? 1 : -1;
-    }
-    return ($a->points < $b->points) ? 1 : -1;
 }
 
 echo "</table>";?>	

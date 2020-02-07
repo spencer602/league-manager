@@ -10,20 +10,20 @@ echo "<body>";
 echo "<script>setTitle('Match History')</script>";
 echo "<script>setCurrentPage('Match History')</script>";
 
-include_once 'sqlscripts.php';
-include_once 'helperfunctions.php';
+include_once 'LeagueManager.php';
 
+$leagueManager = new LeagueManager();
 
+$allMatches = $leagueManager::getAllMatchesFor(2, null, null);
 
-displayAllMatches(2, null);
+guidisplayAllMatches($allMatches);
 
 echo '<br><hr><br>';
 
 ?>
-
-		<div id="footer">
-			<p>Big Sky Shark Hunt, Founded 2019</p>
-		 </div>
+        <div id="footer">
+            <p>Big Sky Shark Hunt, Founded 2019</p>
+        </div>
 	</body>
 </div>
 </html>

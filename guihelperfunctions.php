@@ -46,14 +46,13 @@ function displayMatch($match, $includeDate, $roundData) {
         $loserString = "$loserString  ERO: $ero";
     }
 
-    echo "<span class = 'matchDiv'>";
-    echo "<br>";
-    if ($includeDate) { echo "<hr><br>"; }
+//    echo "<span class = 'matchDiv'>";
+
     if ($includeDate) { echo "<div class = 'dateTimeDiv'>$dateTimeString</div>"; }
     echo $roundData;
     echo "<div class = 'winnerDiv'>$winnerString</div>";
     echo "<div class = 'loserDiv'>$loserString</div>";
-    echo "</span>";
+//    echo "</span>";
 }
 
 function guidisplayTourneyResults($tourneyID) {
@@ -64,6 +63,7 @@ function guidisplayTourneyResults($tourneyID) {
         $plusSign = $points > 0 ? "+" : "";
         echo "$result: $name $plusSign$points<br>";
     }
+    echo "<br>";
 }
 
 function guidisplayTourneyMatches($tourneyID) {
@@ -80,6 +80,7 @@ function guidisplayTourneyMatches($tourneyID) {
         }
 
         displayMatch($match, false, $roundData);
+        if ($i < count($tourneyMatches)-1) { echo "<br>"; }
     }
 }
 
@@ -118,7 +119,10 @@ function guidisplayAllMatches($matches) {
             }
             continue;
         }
+        echo '<br><hr><br>';
+
         displayMatch($match, true, "");
+
     }
 }
 

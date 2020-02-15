@@ -34,6 +34,29 @@ class LeagueManager
         return $locations;
     }
 
+    static function getUnpaidMatchesFor($seasonID) {
+        $query = "SELECT * from matches WHERE season = $seasonID AND paid = 0 ORDER BY match_id;";
+        $tourneyIDs = self::getAllTourneyMatchIDsForSeason($seasonID);
+        $unpaidMatches = array();
+        $allMatchData = queryDB($query);
+
+        while ($row = $allMatchData->fetch_assoc()) {
+            if (!in_array($row['match_id'], $tourneyIDs)) {
+                $match = new Match($row['p1_id'], $row['p2_id'], $row['location_played'], $row['season'], $row['p1_games_needed'],
+                    $row['p1_games_won'], $row['p1_ero'], $row['p2_games_needed'], $row['p2_games_won'], $row['p2_ero'], $row['p1_rank'],
+                    $row['p2_rank'], $row['date_and_time'], $row['match_id'], $row['paid'], $row['p1_points_wagered'], $row['p2_points_wagered'], $row['round']);
+                array_push($unpaidMatches, $match);
+            }
+        }
+
+        return $unpaidMatches;
+    }
+
+    static function markMatchPaid($matchID) {
+        $query = "UPDATE matches SET paid = 1 WHERE match_id = '$matchID';";
+        queryDB($query);
+    }
+
     static function getPlayerNameFromID($id) {
         $data = queryDB("SELECT player_name FROM players WHERE player_id = '$id';");
         $player = $data->fetch_array(MYSQLI_ASSOC);
@@ -63,8 +86,9 @@ class LeagueManager
         $defaultPaidNo = 0;
 
         session_start();
-
-        if ($_SESSION['adminLoggedIn'] != 1) {
+        $admin = $_SESSION['adminLoggedIn'];
+        list($addPlayer, $registerPlayer, $registerTourney, $markPaid, $registerMatch, $validateMatch) = LeagueManager::getAdminPrivilegesFor($admin);
+        if ($registerMatch != 1) {
             if (!password_verify($p1password, $p1Hash)) { die("Invalid Password for $p1name"); }
             if (!password_verify($p2password, $p2Hash)) { die("Invalid Password for $p2name"); }
         }
@@ -166,6 +190,20 @@ class LeagueManager
         }
 
         return $allMatchIDs;
+    }
+
+    static function getAdminPrivilegesFor($username) {
+        $admin = queryDB("SELECT * FROM administrators WHERE name = '$username';");
+        $admin = $admin->fetch_array(MYSQLI_ASSOC);
+        $privileges = array();
+        array_push($privileges, $admin['add_player']);
+        array_push($privileges, $admin['register_player']);
+        array_push($privileges, $admin['register_tourney']);
+        array_push($privileges, $admin['mark_paid']);
+        array_push($privileges, $admin['register_match']);
+        array_push($privileges, $admin['validate_match']);
+
+        return $privileges;
     }
 
     static function getDataForPlayerID($playerID, $seasonID) {
@@ -281,8 +319,8 @@ class LeagueManager
 
         while ($row = $allMatches->fetch_assoc()) {
             $match = new Match($row['p1_id'], $row['p2_id'], $row['location_played'], $row['season'], $row['p1_games_needed'],
-               $row['p1_games_won'], $row['p1_ero'], $row['p2_games_needed'], $row['p2_games_won'], $row['p2_ero'], $row['p1_rank'],
-               $row['p2_rank'], $row['date_and_time'], $row['match_id'], $row['paid'], $row['p1_points_wagered'], $row['p2_points_wagered'], $row['round']);
+                $row['p1_games_won'], $row['p1_ero'], $row['p2_games_needed'], $row['p2_games_won'], $row['p2_ero'], $row['p1_rank'],
+                $row['p2_rank'], $row['date_and_time'], $row['match_id'], $row['paid'], $row['p1_points_wagered'], $row['p2_points_wagered'], $row['round']);
 
             array_push($allMatchesArray, $match);
         }

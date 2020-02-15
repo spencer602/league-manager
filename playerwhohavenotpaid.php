@@ -2,7 +2,7 @@
 
 session_start();
 
-if ($_SESSION['adminLoggedIn'] != 1) {
+if ($_SESSION['adminLoggedIn'] == null) {
     header("location: adminloginform.php");
 }
 

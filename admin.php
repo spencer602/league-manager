@@ -1,9 +1,13 @@
 <?php
 session_start();
 
-if ($_SESSION['adminLoggedIn'] != 1) {
+include_once 'LeagueManager.php';
+
+$admin = $_SESSION['adminLoggedIn'];
+if ($admin == null) {
     header("location: adminloginform.php");
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -37,13 +41,18 @@ if ($_SESSION['adminLoggedIn'] != 1) {
         </ul>
     </div>
     <br>
-    <a href = "registerplayerform.php">Register a Player for the current season</a><br><br>
-    <a href = "markplayerpaidform.php">Mark a player as paid for the current season</a><br><br>
-    <a href = "playerwhohavenotpaid.php">View the players who have not yet paid for the season</a><br><br>
-    <a href = "registertournamentresultform.php">Register tournament Results</a><br><br>
-    <a href = "registertourneymatchform.php">Register tournament match</a><br><br>
-    <a href = "createnewplayerform.php">Create a new player</a>
+    <?php
+    list($addPlayer, $registerPlayer, $registerTourney, $markPaid, $registerMatch, $validateMatch) = LeagueManager::getAdminPrivilegesFor($admin);
 
+    if ($registerPlayer == 1) { echo "<a href = 'registerplayerform.php'>Register a Player for the current season</a><br><br>"; }
+    if ($markPaid == 1) { echo "<a href = 'markplayerpaidform.php'>Mark a player as paid for the current season</a><br><br>"; }
+    echo "<a href = 'playerwhohavenotpaid.php'>View the players who have not yet paid for the season</a><br><br>";
+    if ($registerTourney == 1) { echo "<a href = 'registertournamentresultform.php'>Register tournament Results</a><br><br>"; }
+    if ($registerTourney == 1) { echo "<a href = 'registertourneymatchform.php'>Register tournament match</a><br><br>"; }
+    if ($addPlayer == 1) { echo "<a href = 'createnewplayerform.php'>Create a new player</a><br><br>"; }
+    if ($validateMatch == 1) { echo "<a href = 'validatematchesform.php'>Validate Matches</a>"; }
+
+    ?>
 
     <div id="footer">
         <p>Big Sky Shark Hunt, Founded 2019</p>

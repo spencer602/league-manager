@@ -40,3 +40,22 @@ td{
 	font-size: 14pt;
 	font-weight: bold;
 }
+
+.matchSpan {
+	display: inline-block;
+}
+
+.idSpan {
+	display: inline-block;
+	font-size: 18pt;
+	font-weight: bold;
+	padding-right: 40px;
+	padding-left: 40px;
+
+
+}
+
+.validateMatchDiv {
+	display: inline-flex;
+	align-items: center;
+}

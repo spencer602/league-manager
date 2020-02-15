@@ -1,9 +1,14 @@
 <?php
-session_start();
+include_once 'LeagueManager.php';
 
-if ($_SESSION['adminLoggedIn'] != 1) {
+session_start();
+$admin = $_SESSION['adminLoggedIn'];
+if ($admin == null) {
     header("location: adminloginform.php");
 }
+list($addPlayer, $registerPlayer, $registerTourney, $markPaid, $registerMatch, $validateMatch) = LeagueManager::getAdminPrivilegesFor($admin);
+if ($markPaid != 1) { header("location: adminloginform.php"); }
+
 ?>
 
 <!DOCTYPE html>

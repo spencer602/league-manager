@@ -9,7 +9,7 @@ $password = $_POST['password'];
 $passwordHash = queryDB("SELECT password FROM administrators WHERE name = '$username'");
 $passwordHash = $passwordHash->fetch_array(MYSQLI_ASSOC)['password'];
 
-$_SESSION['adminLoggedIn'] = password_verify($password, $passwordHash) ? 1 : 0;
+$_SESSION['adminLoggedIn'] = password_verify($password, $passwordHash) ? $username : null;
 
 //echo $_SESSION['adminLoggedIn'];
 
